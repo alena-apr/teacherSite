@@ -1,0 +1,103 @@
+<header class="header">
+    <div class="header__wrapper">
+        <div class="container header__content">
+            <div class="header__logo">
+                <img src="./../../../../assets/img/logo-related/bigLogoNoBg.png" alt="">
+            </div>
+            <div class="header__content" *ngIf="showInitTemglate">
+                <div class="header__desc h1">
+                    <p>Здесь собраны неприятные, но важные упражнения</p>
+                </div>
+                <div class="btn-wrapper">
+                    <button class="btnYellow" (click)="showAuth()">Войти</button>
+                    <button class="btnYellow" (click)="showReg()">Регистрация</button>
+                </div>
+            </div>
+            <div class="header__content" *ngIf="showAuthTemplate">
+                <app-auth ></app-auth>
+            </div>
+            <div class="header__content" *ngIf="showRegTemplate">
+                <app-reg ></app-reg>
+            </div>
+        </div>
+    </div>
+</header>
+<section class="section">
+    <div class="container">
+        <div class="title h2">
+            Что здесь можно сделать
+        </div>
+        <div class="card__wrapper">
+
+            <div class="card">
+                <div class="card__img">
+                    <img src="../../../../assets/img/icons/grammar.png" alt="">
+                </div>
+                <div class="card__info">
+                    <div class="casd__title">
+                        <p>Грамматика</p>
+                    </div>
+                    <div class="card__desc">
+                        <p>Ваши самые нелюбимые упражнения по грамматике</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card__img">
+                    <img src="../../../../assets/img/icons/vocabulary.png" alt="">
+                </div>
+                <div class="card__info">
+                    <div class="casd__title">
+                        <p>Словарный запас</p>
+                    </div>
+                    <div class="card__desc">
+                        <p>Ваши самые нелюбимые упражнения по лексике</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card__img">
+                    <img src="../../../../assets/img/icons/listening.png" alt="">
+                </div>
+                <div class="card__info">
+                    <div class="casd__title">
+                        <p>Аудирование</p>
+                    </div>
+                    <div class="card__desc">
+                        <p>В будущем здесь будут ещё и упражнения по аудированию</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</section>
+<footer class="footer">
+    <div class="container">
+        <div class="fotter-info__wrapper">
+            <nav class="nav">
+                <a href="">Главная</a>
+                <a href="">Моя полка</a>
+                <a href="">Грамматика</a>
+                <a href="">Лексика</a>
+                <a href="">Аудирование</a>
+            </nav>
+            <ul class="list">
+                <li><a href="">Войти</a></li>
+                <li><a href="">Зарегистироваться</a></li>
+                <li><a href="">Связаться со мной</a></li>
+            </ul>
+            <div class="footer__pics">
+                <img src="../../../../assets/img/icons/rain.png" alt="" class="rain">
+                <img src="../../../../assets/img/logo-related/umbrellaNoBg.png" alt="" class="logo">
+            </div>
+        </div>
+        <div class="footer__copyright">
+            <p> &#169; 2024 <span>Alёna Apr</span>. Часть прав защищена.</p>
+            <p>Сайт выполнен в образовательных целях для образовательных целей.</p>
+        </div>
+    </div>
+</footer>

@@ -1,0 +1,48 @@
+<div class="auth__wrapper">
+    <form class="form" action="" [formGroup]="regForm" (ngSubmit)="onSubmit()">
+        <div class="input">
+            <div class="input__item">
+                <input class="item-input" placeholder="Логин" type="text" pInputText id="login"
+                    formControlName="login" />
+            </div>
+            <div class="input__item">
+                <input class="item-input" placeholder="Пароль" type="password" pInputText id="psw"
+                    formControlName="psw" />
+            </div>
+            <div class="input__item">
+                <input class="item-input" placeholder="Повторить пароль" type="password" pInputText id="pswRepeat"
+                    formControlName="pswRepeat" />
+            </div>
+            <div class="input__item">
+                <input class="item-input" placeholder="E-mail" type="email" pInputText id="email"
+                    formControlName="email" />
+            </div>
+
+            <ng-container *ngIf="regForm.controls.psw.touched && regForm.controls.psw.errors?.minlength && regForm.controls.psw.errors?.passwordStrength"
+                [ngTemplateOutlet]="minLength"></ng-container>
+            <!-- <ng-container *ngIf="regForm.controls.psw.touched && regForm.controls.psw.errors?.passwordStrength"
+                [ngTemplateOutlet]="strengthError"></ng-container> -->
+
+        </div>
+
+
+
+        <button (click)="registration($event)" class="btnYellow" type="submit"
+            [disabled]="!regForm.valid">Регистрация</button>
+    </form>
+</div>
+
+<ng-template #minLength>
+    <div class="error-warning">
+        <p>
+            Пароль должен содержать не менее 6 символов, содержать буквы в верхнем и нижнем регистре и символы
+        </p>
+    </div>
+</ng-template>
+<!-- <ng-template #strengthError>
+    <div>
+        <div class="error-warning">
+            Пароль должен содержать буквы в верхнем и нижнем регистре, символы и числа
+        </div>
+    </div>
+</ng-template> -->
