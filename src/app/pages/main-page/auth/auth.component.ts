@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-auth',
@@ -7,4 +8,16 @@ import { Component } from '@angular/core';
 })
 export class AuthComponent {
 
+  authForm: FormGroup = new FormGroup({
+    login: new FormControl('', [Validators.required]),
+    psw: new FormControl('', [
+      Validators.required,
+      Validators.minLength(6)
+    ])  
+  });
+
+
+  onSubmit() {
+    console.log(this.authForm.value)
+  }
 }
