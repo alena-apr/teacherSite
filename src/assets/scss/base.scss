@@ -12,8 +12,10 @@ html {
 	scroll-behavior: smooth;
 }
 
-body {
+body, 
+.main-div {
 	height: 100%; /* sticky footer */
+	height: 100vh; /* sticky footer */
 	display: flex; /* sticky footer */
 	flex-direction: column; /* sticky footer */
 	margin: 0;

@@ -7,6 +7,12 @@ const routes: Routes = [
     loadChildren: () =>
       import('./pages/main-page/main-page.module').then((m) => m.MainPageModule),
   },
+    {
+    path: 'exercises',
+    loadChildren: () =>
+      import('./pages/exercises/exercises.module').then((m) => m.ExercisesModule),
+  },
+ 
   { path: '**', redirectTo: 'main' },
 ];
 

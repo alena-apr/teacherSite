@@ -19,8 +19,6 @@ export class MainPageComponent implements OnInit{
 
   ngOnInit() {
     console.log('init');
-    
-    this.showInitTemglate = true;
   }
 
   showAuth() {

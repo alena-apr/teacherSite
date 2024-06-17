@@ -1,14 +1,14 @@
 <div class="auth__wrapper">
-    <form class="form" action="">
+    <form class="form" action=""[formGroup]="regForm" (ngSubmit)="onSubmit()">
         <div class="input">
             <div class="input__item">
                 <span class="item-span">Логин</span>
-                <input class="item-input" type="password" pInputText id="currentPassword"
-                    formControlName="currentPassword" />
+                <input class="item-input" type="text" pInputText id="login"
+                    formControlName="login" />
             </div>
             <div class="input__item">
                 <span class="item-span">Пароль</span>
-                <input class="item-input" type="text" pInputText id="newPassword" formControlName="newPassword" />
+                <input class="item-input" type="password" pInputText id="psw" formControlName="psw" />
             </div>
         </div>
         <button class="btnYellow">Войти</button>
