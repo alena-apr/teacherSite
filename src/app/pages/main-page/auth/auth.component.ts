@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
   styleUrl: './auth.component.scss',
 })
 export class AuthComponent {
-  regForm: FormGroup = new FormGroup({
+  authForm: FormGroup = new FormGroup({
     login: new FormControl('', [Validators.required]),
     psw: new FormControl('', [Validators.required, Validators.minLength(6)]),
   });
