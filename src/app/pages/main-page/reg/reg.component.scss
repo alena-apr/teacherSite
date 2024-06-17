@@ -1,5 +1,5 @@
 // @import './../auth/auth.component.scss';
-@import './../auth/auth.component.scss';
+@import "./../auth/auth.component.scss";
 
 .auth__wrapper {
   margin-top: -50px;
@@ -62,7 +62,7 @@
   }
 }
 
-.item-input::placeholder{
+.item-input::placeholder {
   color: rgba(33, 82, 90, 0.705);
 }
 
@@ -71,7 +71,7 @@
   padding-inline: 20px;
   height: 50px;
   border-radius: 50px;
-  font-size: 24px; 
+  font-size: 24px;
 
   // /* Laptop */
   // @media (max-width: 1199px) {
@@ -96,7 +96,13 @@
   position: absolute;
   bottom: -60px;
   // margin-top: -60px;
-  color:#6b3035;
+  color: #6b3035;
   font-weight: 600;
-}
 
+  /* Mobile XXS */
+  @media (max-width: 576px) {
+    font-size: 12px;
+    line-height: 100%;
+    bottom: -45px;
+  }
+}

@@ -10,8 +10,21 @@
                 <span class="item-span">Пароль</span>
                 <input class="item-input" type="password" pInputText id="psw" formControlName="psw" />
             </div>
+
+            <ng-container *ngIf="authForm.controls.psw.touched && authForm.controls.psw.errors?.minlength"
+                [ngTemplateOutlet]="minLength"></ng-container>
+
         </div>
-        <button class="btnYellow">Войти</button>
+        <button class="btnYellow" [disabled]="!authForm.valid">Войти</button>
     </form>
 
 </div>
+
+
+<ng-template #minLength>
+    <div class="error-warning">
+        <p>
+           Проверьте пароль. 
+        </p>
+    </div>
+</ng-template>

@@ -41,6 +41,7 @@
 }
 
 .input {
+  position: relative;
   margin-bottom: 90px;
   display: flex;
   flex-direction: column;
@@ -142,5 +143,21 @@
   @media (max-width: 576px) {
     width: 280px;
     height: 50px;
+  }
+}
+
+.error-warning {
+  position: absolute;
+  bottom: -60px;
+  // margin-top: -60px;
+  color: #6b3035;
+  font-weight: 600;
+  // text-align: center;
+
+  /* Mobile XXS */
+  @media (max-width: 576px) {
+    font-size: 12px;
+    line-height: 100%;
+    bottom: -45px;
   }
 }

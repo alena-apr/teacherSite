@@ -23,8 +23,8 @@ export class AuthComponent {
   ) {}
 
   onSubmit() {
-    const login = this.regForm.get('login')?.value;
-    const psw = this.regForm.get('psw')?.value;
+    const login = this.authForm.get('login')?.value;
+    const psw = this.authForm.get('psw')?.value;
 
     const authUser: IUser = {
       login: login,

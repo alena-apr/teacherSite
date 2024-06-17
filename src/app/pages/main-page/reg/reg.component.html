@@ -1,5 +1,5 @@
 <div class="auth__wrapper">
-    <form class="form" action="" [formGroup]="regForm" (ngSubmit)="onSubmit()">
+    <form class="form" [formGroup]="regForm" (ngSubmit)="onSubmit()">
         <div class="input">
             <div class="input__item">
                 <input class="item-input" placeholder="Логин" type="text" pInputText id="login"
@@ -20,8 +20,8 @@
 
             <ng-container *ngIf="regForm.controls.psw.touched && regForm.controls.psw.errors?.minlength && regForm.controls.psw.errors?.passwordStrength"
                 [ngTemplateOutlet]="minLength"></ng-container>
-            <!-- <ng-container *ngIf="regForm.controls.psw.touched && regForm.controls.psw.errors?.passwordStrength"
-                [ngTemplateOutlet]="strengthError"></ng-container> -->
+            <ng-container *ngIf="!isPswSame"
+                [ngTemplateOutlet]="isSamePsw"></ng-container>
 
         </div>
 
@@ -39,10 +39,10 @@
         </p>
     </div>
 </ng-template>
-<!-- <ng-template #strengthError>
+<ng-template #isSamePsw>
     <div>
         <div class="error-warning">
-            Пароль должен содержать буквы в верхнем и нижнем регистре, символы и числа
+            Пароли не совпадают
         </div>
     </div>
-</ng-template> -->
+</ng-template>
