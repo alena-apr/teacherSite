@@ -13,7 +13,8 @@ html {
 }
 
 body, 
-.main-div {
+.main-div, 
+.app-root {
 	height: 100%; /* sticky footer */
 	height: 100vh; /* sticky footer */
 	display: flex; /* sticky footer */
@@ -23,8 +24,11 @@ body,
 	color: $text;
 }
 
-body > * {
+body > *, 
+.app-root, 
+.main-div {
 	flex-shrink: 0; /* sticky footer */
+	flex-grow: 1;
 }
 
 input, textarea, button {

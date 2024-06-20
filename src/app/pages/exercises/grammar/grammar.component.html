@@ -1,1 +1,36 @@
 <p>grammar works!</p>
+
+HERE IS THE GRAMMAR <br>
+
+<br>
+
+<div *ngIf="grammarExs" class="card">
+    <div *ngFor="let ex of grammarExs">
+        {{ex.title}} <br>
+        {{ex.difficulty}} <br>
+
+        <br>
+        <form action="" [formGroup]="exForm" (ngSubmit)="onSubmit()">
+
+            <div *ngFor="let el of phrases; let i = index">
+                {{el.id}}. {{el.transformedText[0]}}
+                <input type="text" class="input" id={{i}} formControlName="{{el.id}}">
+                {{el.transformedText[1]}}
+            </div>
+
+
+            <br>
+            <br>
+            <button type="submit">SHOOOOOt</button>
+        </form>
+
+        <br>
+        <br>
+        <!-- <pre>{{answer}}</pre> -->
+        <!-- <pre>{{exForm.getRawValue()}}</pre> -->
+
+        <br>
+        <br>
+
+
+    </div>

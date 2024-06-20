@@ -46,7 +46,7 @@ export class AuthComponent {
 
           console.log('authUser', authUser)
 
-          this.router.navigate(['exercises']);
+          this.router.navigate(['exercises/start']);
         },
         (err: HttpErrorResponse) => {
           console.log('err', err);

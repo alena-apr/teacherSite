@@ -86,7 +86,7 @@ export class RegComponent implements OnInit {
       (data) => {
         localStorage.setItem(USER_STORE_NAME, JSON.stringify(userData.login));
         console.log('userData', userData);
-        this.router.navigate(['exercises']);
+        this.router.navigate(['exercises/start']);
       },
       (err: HttpErrorResponse) => {
         console.log('err', err);
