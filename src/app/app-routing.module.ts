@@ -5,19 +5,23 @@ const routes: Routes = [
   {
     path: 'main',
     loadChildren: () =>
-      import('./pages/main-page/main-page.module').then((m) => m.MainPageModule),
+      import('./pages/main-page/main-page.module').then(
+        (m) => m.MainPageModule
+      ),
   },
-    {
+  {
     path: 'exercises',
     loadChildren: () =>
-      import('./pages/exercises/exercises.module').then((m) => m.ExercisesModule),
+      import('./pages/exercises/exercises.module').then(
+        (m) => m.ExercisesModule
+      ),
   },
- 
+
   { path: '**', redirectTo: 'main' },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

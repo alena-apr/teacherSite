@@ -6,18 +6,26 @@ import { StartComponent } from './start/start.component';
 
 const routes: Routes = [
   {
-    path: '', component: StartComponent,
+    path: '',
+    component: StartComponent,
     children: [
       {
-        path: 'start', 
+        path: 'start',
         component: ExercisesComponent,
       },
       {
-        path: 'grammar', 
+        path: 'grammar',
         component: GrammarComponent,
-      }, 
-    ]
-   },
+      },
+      // {
+      //   path: 'grammar/exercise/:id',
+      //   loadChildren: () =>
+      //     import('../exercises/grammar-item/grammar-item.module').then(
+      //       (m) => m.GrammarItemModule
+      //     ),
+      // },
+    ],
+  },
   // { path: 'grammar', component: GrammarComponent },
 ];
 

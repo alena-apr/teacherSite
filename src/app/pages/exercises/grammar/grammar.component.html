@@ -1,9 +1,17 @@
 <p>grammar works!</p>
 
-HERE IS THE GRAMMAR <br>
+<div class="conteiner main-dvi">
+    <div *ngIf="grammarExs">
+        <div *ngFor="let exercise of grammarExs" (click)="goToExercisePage(exercise)">
+            <h3>{{exercise.title}}</h3>
+            <h3>{{exercise.difficulty}}</h3>
+        </div>
+    </div>
+</div>
 
-<br>
 
+
+<!--
 <div *ngIf="grammarExs" class="card">
     <div *ngFor="let ex of grammarExs">
         {{ex.title}} <br>
@@ -12,10 +20,15 @@ HERE IS THE GRAMMAR <br>
         <br>
         <form action="" [formGroup]="exForm" (ngSubmit)="onSubmit()">
 
-            <div *ngFor="let el of phrases; let i = index">
+            <div *ngFor="let el of ex.text; let i = index">
                 {{el.id}}. {{el.transformedText[0]}}
-                <input type="text" class="input" id={{i}} formControlName="{{el.id}}">
+                <input type="text" class="input" id={{i}} formControlName="{{el.id}}" />
                 {{el.transformedText[1]}}
+                <span *ngIf=" showAnswers && ex.studentAnswer"
+                    [ngClass]="ex.studentAnswer[i].isCorrect ? 'nice' : 'boo' "
+
+                >     OH</span>
+                    
             </div>
 
 
@@ -26,11 +39,11 @@ HERE IS THE GRAMMAR <br>
 
         <br>
         <br>
-        <!-- <pre>{{answer}}</pre> -->
-        <!-- <pre>{{exForm.getRawValue()}}</pre> -->
+      
 
         <br>
         <br>
 
 
     </div>
+-->
