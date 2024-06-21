@@ -16,4 +16,11 @@ export class GrammarService {
     return this.grammarRestService.getAllGrammar()
   }
 
+  getGrammarById(id: string): Observable<IExercise> {
+    return this.grammarRestService.getGrammarById(id);
+  }
+
+  getGrammarByIdWOAnswers(id: string): Observable<IExercise> {
+    return this.grammarRestService.getGrammarByIdWOAnswers(id);
+  }
 }

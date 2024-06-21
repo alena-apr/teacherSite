@@ -13,4 +13,11 @@ export class GrammarRestService {
   getAllGrammar(): Observable<IExercise[]> {
     return this.http.get<IExercise[]>('http://localhost:3000/grammar')
   }
+
+  getGrammarById(id: string): Observable<IExercise> {
+    return this.http.get<IExercise>(`http://localhost:3000/grammar/${id}`)
+  }
+  getGrammarByIdWOAnswers(id: string): Observable<IExercise> {
+    return this.http.get<IExercise>(`http://localhost:3000/grammar/exercise/${id}`)
+  }
 }

@@ -3,7 +3,7 @@ export interface IExercise {
   type: string;
   title: string;
   difficulty: number;
-  realAnswer: IAnswer[];
+  realAnswer: IAnswer[] | [];
   text: IText[];
   studentAnswer: IFormatedAnswer[];
 }

@@ -167,6 +167,6 @@ export class GrammarComponent {
   }
 
   goToExercisePage(exercise: IExercise) {
-    this.router.navigate([`exercise/${exercise._id}`])
+    this.router.navigate([`/exercises/exercise/${exercise._id}`])
   }
 }

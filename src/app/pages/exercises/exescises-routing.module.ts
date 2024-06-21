@@ -17,13 +17,13 @@ const routes: Routes = [
         path: 'grammar',
         component: GrammarComponent,
       },
-      // {
-      //   path: 'grammar/exercise/:id',
-      //   loadChildren: () =>
-      //     import('../exercises/grammar-item/grammar-item.module').then(
-      //       (m) => m.GrammarItemModule
-      //     ),
-      // },
+      {
+        path: 'exercise/:id',
+        loadChildren: () =>
+          import('../grammar-item/grammar-item.module').then(
+            (m) => m.GrammarItemModule
+          ),
+      },
     ],
   },
   // { path: 'grammar', component: GrammarComponent },
