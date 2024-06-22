@@ -38,7 +38,7 @@ export class AuthComponent {
       )
       .subscribe(
         (data) => {
-          authUser.id = data.id;
+          authUser._id = data.id;
           this.userService.setUser(authUser);
           const token: string = data.access_token;
           this.userService.setToken(token);

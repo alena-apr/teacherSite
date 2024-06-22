@@ -13,10 +13,10 @@
                 {{el.id}}. {{el.transformedText[0]}}
                 <input type="text" class="input" id={{i}} formControlName="{{el.id}}" />
                 {{el.transformedText[1]}}
-                <!-- <span *ngIf=" showAnswers && ex.studentAnswer"
-                    [ngClass]="ex.studentAnswer[i].isCorrect ? 'nice' : 'boo' "
+                <span *ngIf=" showAnswers && exercise.studentAnswers"
+                    [ngClass]="isCorrect ? 'nice' : 'boo'"
 
-                >     OH</span> -->
+                >     OH</span>
                     
             </div>
 

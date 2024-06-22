@@ -5,7 +5,7 @@
 //     text: IPhrase[];
 // }
 
-import { IExercise, IExerciseWStudentAnsw } from '../../app/models/exercise';
+// import { IExercise, IExerciseWStudentAnsw } from '../../app/models/exercise';
 
 // const obj = {
 //     id: '333',
@@ -15,7 +15,7 @@ import { IExercise, IExerciseWStudentAnsw } from '../../app/models/exercise';
 //     trasformText: ['dsdsd', 'sdsdsd1']
 // }
 
-export const exercise1: IExercise[] | IExerciseWStudentAnsw[] = [
+export const exercise1 = [
   {
     _id: 'qwerty1234',
     type: 'input',
