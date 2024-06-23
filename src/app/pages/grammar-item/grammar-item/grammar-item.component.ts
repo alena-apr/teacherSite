@@ -107,6 +107,7 @@ export class GrammarItemComponent {
       // this.isCorrect = this.checkedAnswers.studentAnswers.map(el => el.isCorrect)
       // console.log(this.isCorrect)
 
+      this.isCorrect = this.checkedAnswers.studentAnswers.map(el => el.isCorrect)
 
     })
 

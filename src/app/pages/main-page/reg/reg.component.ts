@@ -4,8 +4,9 @@ import { createPasswordStrengthValidator } from '../../../validators/psw';
 import { createEmailValidator } from '../../../validators/email';
 import { UserService } from '../../../services/user/user.service';
 import { IUser, USER_STORE_NAME } from '../../../models/user';
-import { HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { createLoginValidator } from '../../../validators/login';
 
 @Component({
   selector: 'app-reg',
@@ -14,7 +15,10 @@ import { Router } from '@angular/router';
 })
 export class RegComponent implements OnInit {
   regForm: FormGroup = new FormGroup({
-    login: new FormControl('', [Validators.required]),
+    login: new FormControl('', [
+      Validators.required,
+      createLoginValidator(),
+    ]),
     psw: new FormControl('', [
       Validators.required,
       Validators.minLength(6),
@@ -33,41 +37,18 @@ export class RegComponent implements OnInit {
   });
 
   isPswSame: boolean = true;
-  // login: string | undefined;
-  // psw: string | undefined;
-  // pswRepeat: string | undefined;
-  // email: string | undefined;
 
-  constructor(private userServise: UserService, private router: Router) {}
+  constructor(
+    private userService: UserService,
+    private router: Router,
+    private http: HttpClient,
+  ) { }
 
   ngOnInit(): void {
-    // this.regForm = new FormGroup({
-    //   login: new FormControl('', [Validators.required]),
-    //   psw: new FormControl('', [
-    //     Validators.required,
-    //     Validators.minLength(6),
-    //     createPasswordStrengthValidator(),
-    //   ]),
-    //   pswRepeat: new FormControl('', [
-    //     Validators.required,
-    //     Validators.minLength(6),
-    //     createPasswordStrengthValidator(),
-    //   ]),
-    //   email: new FormControl('', [
-    //     Validators.required,
-    //     Validators.minLength(5),
-    //     createEmailValidator(),
-    //   ])
-    // })
   }
 
-  // registration(e: any) {
-  //   console.log(e);
-  //   console.log('registration', this.regForm.value);
-  // }
 
   onSubmit() {
-    // console.log('onSubmit', this.regForm.value);
 
     const login = this.regForm.get('login')?.value;
     const psw = this.regForm.get('psw')?.value;
@@ -82,16 +63,45 @@ export class RegComponent implements OnInit {
       email: email,
     };
 
-    this.userServise.regUser(userData).subscribe(
+    this.userService.regUser(userData).subscribe(
       (data) => {
         localStorage.setItem(USER_STORE_NAME, JSON.stringify(userData.login));
         console.log('userData', userData);
-        this.router.navigate(['exercises/start']);
+        // this.router.navigate(['exercises/start']);
       },
       (err: HttpErrorResponse) => {
         console.log('err', err);
       }
     );
+
+ const authUser: IUser = {
+      login: login,
+      psw: psw,
+    };
+
+    this.http
+      .post<{ access_token: string; id: string }>(
+        'http://localhost:3000/user/login/' ,
+        authUser
+      )
+      .subscribe(
+        (data) => {
+          authUser._id = data.id;
+          this.userService.setUser(authUser);
+          const token: string = data.access_token;
+          this.userService.setToken(token);
+          this.userService.setToStore(token);
+
+          console.log('authUser', authUser)
+
+          this.router.navigate(['exercises/start']);
+        },
+        (err: HttpErrorResponse) => {
+          console.log('err', err);
+        }
+      );
+
+
   }
 
   checkPsw(psw1: string, psw2: string): boolean {

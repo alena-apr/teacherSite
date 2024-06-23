@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { ExercisesComponent } from './exercises/exercises.component';
 import { GrammarComponent } from './grammar/grammar.component';
 import { StartComponent } from './start/start.component';
+import { adminGuard } from '../../guards/admin/admin.guard';
 
 const routes: Routes = [
   {
@@ -24,9 +25,16 @@ const routes: Routes = [
             (m) => m.GrammarItemModule
           ),
       },
+      {
+        path: 'admin',
+        loadChildren: () =>
+          import('../admin/admin.module').then(
+            (m) => m.AdminModule
+          ),
+        // canActivate: [adminGuard]
+      },
     ],
   },
-  // { path: 'grammar', component: GrammarComponent },
 ];
 
 @NgModule({

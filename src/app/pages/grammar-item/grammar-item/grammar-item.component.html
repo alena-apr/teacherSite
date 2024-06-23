@@ -12,11 +12,12 @@
             <div *ngFor="let el of exercise.text; let i = index">
                 {{el.id}}. {{el.transformedText[0]}}
                 <input type="text" class="input" id={{i}} formControlName="{{el.id}}" />
-                {{el.transformedText[1]}}
                 <span *ngIf=" showAnswers && exercise.studentAnswers"
-                    [ngClass]="isCorrect ? 'nice' : 'boo'"
+                    [ngClass]="isCorrect[i] ? 'nice' : 'boo'"
 
-                >     OH</span>
+                >     OH</span>  
+                {{el.transformedText[1]}}
+               
                     
             </div>
 

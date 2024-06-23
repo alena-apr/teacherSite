@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { IUser } from '../../../models/user';
+import { IUser, USER_STORE_NAME } from '../../../models/user';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { UserService } from '../../../services/user/user.service';
 import { Router } from '@angular/router';
@@ -45,6 +45,7 @@ export class AuthComponent {
           this.userService.setToStore(token);
 
           console.log('authUser', authUser)
+          localStorage.setItem(USER_STORE_NAME, JSON.stringify(authUser.login))
 
           this.router.navigate(['exercises/start']);
         },
