@@ -1,0 +1,18 @@
+<p>admin-students works!</p>
+
+<div class="main-content">
+    <div *ngIf="students" class="container">
+        <div *ngFor="let student of students" (click)="goToStudentPage(student)">
+            <br>
+            <br>
+            ______________________ <br>
+            {{student.login}} <br>
+            
+            {{student.email}}
+            <br>
+            {{student._id}}
+            <br>
+            _______________________
+        </div>
+    </div>
+</div>

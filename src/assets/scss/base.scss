@@ -26,7 +26,8 @@ body,
 
 body > *, 
 .app-root, 
-.main-div {
+.main-div, 
+.main-content {
 	flex-shrink: 0; /* sticky footer */
 	flex-grow: 1;
 }

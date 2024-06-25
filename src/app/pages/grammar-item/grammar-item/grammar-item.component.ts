@@ -39,7 +39,7 @@ export class GrammarItemComponent {
     const paramValueId = routerIdParam || querryIdParam;
 
     if (paramValueId) {
-      this.getExercise(paramValueId)
+      this.getExercise(paramValueId);
     }
   }
 

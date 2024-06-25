@@ -23,4 +23,8 @@ export class AnswerGrammarService {
   checkAndPostAnswer(data: IAnswerForDb): Observable<IAnswerForDb> {
     return this.answerrGrammarRestService.checkAndPostAnswer(data)
   }
+
+  getAnswerForAdminByUser(id: string): Observable<IAnswerForDb[]> {
+    return this.answerrGrammarRestService.getAnswersForAdminByUser(id);
+  }
 }

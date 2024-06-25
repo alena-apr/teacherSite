@@ -21,4 +21,8 @@ export class AnswerGrammarRestService {
   checkAndPostAnswer(data: IAnswerForDb): Observable<IAnswerForDb> {
     return this.http.post<IAnswerForDb>('http://localhost:3000/answer-grammar', data)
   }
+
+  getAnswersForAdminByUser(id: string): Observable<IAnswerForDb[]> {
+    return this.http.get<IAnswerForDb[]>(`http://localhost:3000/answer-grammar/answers-for-admin/${id}`)
+  }
 }

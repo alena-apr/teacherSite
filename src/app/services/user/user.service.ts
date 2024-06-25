@@ -50,4 +50,12 @@ export class UserService {
     this.token = token;
     localStorage.setItem('user_token', this.token);
   }
+
+  getAllUsers(): Observable<IUser[]> {
+    return this.userServiceRest.getAllUsers()
+  }
+
+  getUserById(id: string): Observable<IUser> {
+    return this.userServiceRest.getUserById(id);
+  }
 }

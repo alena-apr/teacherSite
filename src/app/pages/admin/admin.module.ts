@@ -8,11 +8,13 @@ import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.compo
 import { RadioButtonModule } from 'primeng/radiobutton';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { InputNumberModule } from 'primeng/inputnumber';
+import { AdminStudentsComponent } from './admin-students/admin-students.component';
 
 @NgModule({
   declarations: [
     AdminComponent,
-    AdminDashboardComponent
+    AdminDashboardComponent,
+    AdminStudentsComponent
   ],
   imports: [
     CommonModule,

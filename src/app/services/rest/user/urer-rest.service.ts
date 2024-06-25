@@ -13,4 +13,12 @@ export class UrerRestService {
   regUser(userData: IUser): Observable<IUser> {
     return this.http.post<IUser>('http://localhost:3000/user', userData)
   }
+
+  getAllUsers(): Observable<IUser[]> {
+    return this.http.get<IUser[]>('http://localhost:3000/user');
+  } 
+
+  getUserById(id: string): Observable<IUser> {
+    return this.http.get<IUser>(`http://localhost:3000/user/${id}`)
+  }
 }
