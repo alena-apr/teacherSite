@@ -5,10 +5,11 @@ import { AdminRoutingModule } from './admin-routing.module';
 import { AdminComponent } from './admin/admin.component';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 
-import { RadioButtonModule } from 'primeng/radiobutton';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { InputNumberModule } from 'primeng/inputnumber';
+// import { RadioButtonModule } from 'primeng/radiobutton';
+import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
+// import { InputNumberModule } from 'primeng/inputnumber';
 import { AdminStudentsComponent } from './admin-students/admin-students.component';
+import { BrowserModule } from '@angular/platform-browser';
 
 @NgModule({
   declarations: [
@@ -21,8 +22,10 @@ import { AdminStudentsComponent } from './admin-students/admin-students.componen
     AdminRoutingModule, 
     ReactiveFormsModule,
     FormsModule,
-    RadioButtonModule, 
-    InputNumberModule, 
+    // BrowserModule
+    // RadioButtonModule,
+    // InputNumberModule, 
+    // FormBuilder, 
   ]
 })
 export class AdminModule { }

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { UserService } from '../../../services/user/user.service';
-import { IUser } from '../../../models/user';
+import { IUser, USER_STORE_NAME } from '../../../models/user';
 import { Router } from '@angular/router';
 
 @Component({
@@ -25,5 +25,11 @@ export class HeaderComponent {
   goToGrammar(): void {
     console.log("goToGrammar")
     this.router.navigate(['exercises/grammar']);
+  }
+
+  logOut() {
+    localStorage.removeItem(USER_STORE_NAME);
+    localStorage.removeItem('user_token');
+    this.router.navigate(['main'])
   }
 }

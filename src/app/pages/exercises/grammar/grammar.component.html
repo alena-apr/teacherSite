@@ -1,12 +1,26 @@
 <p>grammar works!</p>
 
-<div class="conteiner main-dvi">
+<div class="conteiner main-div">
+
+
+    @if(grammarExs) {
+        @for(exercise of grammarExs; track exercise) {
+            <div class="card" (click)="goToExercisePage(exercise)">
+                <h3>{{exercise.title}}</h3>
+                <h3>{{exercise.difficulty}}</h3>
+            </div>
+        }
+    }
+
+
+
+<!-- 
     <div *ngIf="grammarExs">
         <div *ngFor="let exercise of grammarExs" (click)="goToExercisePage(exercise)">
             <h3>{{exercise.title}}</h3>
             <h3>{{exercise.difficulty}}</h3>
         </div>
-    </div>
+    </div> -->
 </div>
 
 

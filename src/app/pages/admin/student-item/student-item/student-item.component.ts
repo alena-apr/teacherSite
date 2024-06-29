@@ -15,6 +15,11 @@ export class StudentItemComponent {
 
   student: IUser;
   studentAnswers: IExercise[];
+
+  // answers: (string | undefined)[]
+
+  mistakeRate: (boolean)[][];
+  rate: any
   
   constructor(
     private route: ActivatedRoute, 
@@ -37,6 +42,8 @@ export class StudentItemComponent {
     //     this.getStudentAnswers(id)
     //   }
 
+    //  this.answers = this.studentAnswers.map(el => el._id)
+
 
   }
 
@@ -49,8 +56,19 @@ export class StudentItemComponent {
 
   getStudentAnswers(userId: string) {
     this.answerGrammarService.getAnswerForAdminByUser(userId).subscribe((data) => {
-      console.log(data)
-      this.studentAnswers = data;
+      if (Array.isArray(data)) {
+        console.log(data)
+        this.studentAnswers = data;
+        
+        this.mistakeRate = data.map((el) => {
+          return el.studentAnswers.map(el => el.isCorrect as boolean)
+        })
+
+        console.log(this.mistakeRate)
+
+        const falseNum = this.mistakeRate.map((el: boolean[]) => el.filter(el => el === false));
+        console.log(falseNum)
+      }
     })
   }
 }

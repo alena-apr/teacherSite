@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { GrammarService } from '../../../services/grammar/grammar.service';
+import { IExercise } from '../../../models/exercise';
 
 @Component({
   selector: 'app-admin',
@@ -7,71 +9,83 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
   styleUrl: './admin.component.scss',
 })
 export class AdminComponent {
-  phraseNumber: any;
+  exerciseForm: FormGroup;
 
-  // phraseNumber: FormGroup = new FormGroup({
-  //   phraseNumber: new FormControl('', Validators.required)
-  // });
+  payload: any;
 
-  formGroup: FormGroup;
-
-  ngOninit() {}
-
-  createExercise() {}
-
-  createFormGroup(questionsNumber: number[]): FormGroup {
-    let group: any = {};
-    questionsNumber.forEach((question: number, index: number) => {
-      group[question] = new FormControl('', Validators.required);
+  constructor(
+    private fb: FormBuilder,
+    private grammarService: GrammarService,
+  ) {
+    this.exerciseForm = this.fb.group({
+      type: ['', Validators.required],
+      title: ['', Validators.required],
+      difficulty: ['', Validators.required],
+      realAnswers: this.fb.array([]),
     });
-    return new FormGroup(group);
-  }
-  checkNumber() {
-    console.log(this.phraseNumber);
   }
 
-  // initFormGroupFromArray(data: any[], root = true): FormGroup[] {
-  //   if (Array.isArray(data)) {
-  //     const dataArr = data.map((row) => {
-  //       if (root) {
-  //         // entry point
-  //         //         const key = this.setRowTypeKey(row?.name);
-  //         return this.recursFormControllerBuilder(row);
-  //       } else {
-  //         return this.recursFormControllerBuilder(row);
-  //       }
-  //     });
-  //     return dataArr;
-  //   }
-  // }
-  // // main function for dynamic reactive form builder
-  // recursFormControllerBuilder(row): FormGroup {
-  //   const controlObject: any = {};
-  //   if (typeof row === 'object') {
-  //     for (const prop in row) {
-  //       if (Array.isArray(row[prop])) {
-  //         // TODO check logic for additional logic
-  //         controlObject[prop] = this._fb.array(
-  //           this.initFormGroupFromArray(row[prop])
-  //         );
-  //       } else {
-  //         if (row[prop] && typeof row[prop] === 'object') {
-  //           if (row[prop] instanceof Date) {
-  //             controlObject[prop] = new FormControl(
-  //               new Date(row[prop]).toISOString()
-  //             );
-  //           } else {
-  //             controlObject[prop] = this.recursFormControllerBuilder(row[prop]);
-  //           }
-  //         } else {
-  //           controlObject[prop] = new FormControl(row[prop]);
-  //           controlObject.yearBalanceUniqKey = new FormControl('');
-  //         }
-  //       }
-  //     }
-  //   } else {
-  //     controlObject.value = new FormControl(row);
-  //   }
-  //   return new FormGroup(controlObject);
-  // }
+  get realAnswers(): FormArray {
+    return this.exerciseForm.get('realAnswers') as FormArray;
+  }
+
+  newRealAnswers(): FormGroup {
+    return this.fb.group({
+      id: ['', Validators.required],
+      answer: ['', Validators.required],
+      text: ['', Validators.required],
+    });
+  }
+
+  addRealAnswers() {
+    this.realAnswers.push(this.newRealAnswers());
+  }
+
+  removeRealAnswers(i: number) {
+    this.realAnswers.removeAt(i);
+  }
+
+  showPayload() {
+    this.payload = JSON.stringify(this.exerciseForm.getRawValue());
+  }
+
+  showFormattedForm() {
+    const rawValue = this.exerciseForm.getRawValue();
+
+    const realAnswers = rawValue.realAnswers.map(
+      (el: { id: string; answer: string; text: string }) => {
+        const realAnswerObj = {
+          id: parseInt(el.id),
+          answer: el.answer,
+        };
+        return realAnswerObj;
+      }
+    );
+
+    const text = rawValue.realAnswers.map(
+      (el: { id: string; answer: string; text: string }) => {
+        const textObj = {
+          id: parseInt(el.id),
+          text: el.text,
+          transformedText: el.text.split('***'),
+        };
+        return textObj;
+      }
+    );
+
+    const exerciseForDb:IExercise = {
+      type: rawValue.type,
+      title: rawValue.title,
+      difficulty: parseInt(rawValue.difficulty),
+      realAnswers: realAnswers,
+      text: text,
+      studentAnswers: [],
+    };
+
+    console.log(exerciseForDb);
+
+    this.grammarService.postOneGrammar(exerciseForDb).subscribe((data) => {
+      console.log(data);
+    })
+  }
 }

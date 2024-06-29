@@ -2,9 +2,9 @@
     <div class="header__wrapper">
         <div class="container header__content">
             <div class="bg-wrapper-big">
-                <div class="header__logo">
+                <a class="header__logo" routerLink="main/exercises/start">
                     <img src="/assets/img/logo-related/umbrellaNoBg.png" alt="">
-                </div>
+                </a>
                 <div *ngIf="user" class="hello">
                     It's tougth, {{user.login}}!
                 </div>
@@ -12,7 +12,7 @@
                     <a href="" class="bookshelf-logo" click="">
                         <img src="/assets/img/icons/bookshelf.png" alt="Bookshelf">
                     </a>
-                    <a href="" class="exit-logo">
+                    <a  class="exit-logo" (click)="logOut()">
                         <img src="/assets/img/icons/exit.png" alt="Exit">
                     </a>
 

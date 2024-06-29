@@ -15,10 +15,7 @@ import { createLoginValidator } from '../../../validators/login';
 })
 export class RegComponent implements OnInit {
   regForm: FormGroup = new FormGroup({
-    login: new FormControl('', [
-      Validators.required,
-      createLoginValidator(),
-    ]),
+    login: new FormControl('', [Validators.required, createLoginValidator()]),
     psw: new FormControl('', [
       Validators.required,
       Validators.minLength(6),
@@ -41,71 +38,71 @@ export class RegComponent implements OnInit {
   constructor(
     private userService: UserService,
     private router: Router,
-    private http: HttpClient,
-  ) { }
+    private http: HttpClient
+  ) {}
 
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 
   onSubmit() {
-
     const login = this.regForm.get('login')?.value;
     const psw = this.regForm.get('psw')?.value;
     const pswRepeat = this.regForm.get('pswRepeat')?.value;
     const email = this.regForm.get('email')?.value;
 
-    this.checkPsw(psw, pswRepeat);
+    if (this.checkPswSame(psw, pswRepeat)) {
 
-    const userData: IUser = {
-      login: login,
-      psw: psw,
-      email: email,
-    };
+      console.log('just checking passwords', this.checkPswSame)
 
-    this.userService.regUser(userData).subscribe(
-      (data) => {
-        localStorage.setItem(USER_STORE_NAME, JSON.stringify(userData.login));
-        console.log('userData', userData);
-        // this.router.navigate(['exercises/start']);
-      },
-      (err: HttpErrorResponse) => {
-        console.log('err', err);
-      }
-    );
+      const userData: IUser = {
+        login: login,
+        psw: psw,
+        email: email,
+      };
 
- const authUser: IUser = {
-      login: login,
-      psw: psw,
-    };
+      const authUser: IUser = {
+        login: login,
+        psw: psw,
+      };
 
-    this.http
-      .post<{ access_token: string; id: string }>(
-        'http://localhost:3000/user/login/' ,
-        authUser
-      )
-      .subscribe(
+      this.userService.regUser(userData).subscribe(
         (data) => {
-          authUser._id = data.id;
-          this.userService.setUser(authUser);
-          const token: string = data.access_token;
-          this.userService.setToken(token);
-          this.userService.setToStore(token);
-
-          console.log('authUser', authUser)
-
-          this.router.navigate(['exercises/start']);
+          localStorage.setItem(USER_STORE_NAME, JSON.stringify(userData.login));
+          console.log('userData', userData);
+          // this.router.navigate(['exercises/start']);
         },
         (err: HttpErrorResponse) => {
           console.log('err', err);
         }
       );
 
+      
 
+      this.http
+        .post<{ access_token: string; id: string }>(
+          'http://localhost:3000/user/login/',
+          authUser
+        )
+        .subscribe(
+          (data) => {
+            authUser._id = data.id;
+            this.userService.setUser(authUser);
+            const token: string = data.access_token;
+            this.userService.setToken(token);
+            this.userService.setToStore(token);
+
+            console.log('authUser', authUser);
+
+            this.router.navigate(['exercises/start']);
+          },
+          (err: HttpErrorResponse) => {
+            console.log('err', err);
+          }
+        );
+    }
   }
 
-  checkPsw(psw1: string, psw2: string): boolean {
-    this.isPswSame = psw1 !== psw2;
+  checkPswSame(psw1: string, psw2: string): boolean {
+    this.isPswSame = !(psw1 !== psw2);
     return this.isPswSame;
   }
 }

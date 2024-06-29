@@ -2,24 +2,24 @@
     <form class="form" [formGroup]="regForm" (ngSubmit)="onSubmit()">
         <div class="input">
             <div class="input__item">
-                <input class="item-input" placeholder="Логин" type="text" pInputText id="login"
+                <input class="item-input" placeholder="Логин" type="text"  id="login"
                     formControlName="login" />
             </div>
             <div class="input__item">
-                <input class="item-input" placeholder="Пароль" type="password" pInputText id="psw"
+                <input class="item-input" placeholder="Пароль" type="password"  id="psw"
                     formControlName="psw" />
             </div>
             <div class="input__item">
-                <input class="item-input" placeholder="Повторить пароль" type="password" pInputText id="pswRepeat"
+                <input class="item-input" placeholder="Повторить пароль" type="password"  id="pswRepeat"
                     formControlName="pswRepeat" />
             </div>
             <div class="input__item">
-                <input class="item-input" placeholder="E-mail" type="email" pInputText id="email"
+                <input class="item-input" placeholder="E-mail" type="email"  id="email"
                     formControlName="email" />
             </div>
 
-            <ng-container *ngIf="regForm.controls.psw.touched && regForm.controls.psw.errors?.minlength && regForm.controls.psw.errors?.passwordStrength"
-                [ngTemplateOutlet]="minLength"></ng-container>
+            <ng-container *ngIf="regForm.controls.psw.touched && regForm.controls.psw.dirty && regForm.controls.psw.errors?.minlength && regForm.controls.psw.errors?.passwordStrength"
+                [ngTemplateOutlet]="strongPsw"></ng-container>
             <ng-container *ngIf="!isPswSame"
                 [ngTemplateOutlet]="isSamePsw"></ng-container>
 
@@ -32,17 +32,17 @@
     </form>
 </div>
 
-<ng-template #minLength>
+<ng-template #strongPsw>
     <div class="error-warning">
         <p>
-            Пароль должен содержать не менее 6 символов, содержать буквы в верхнем и нижнем регистре и символы
+            Пароль должен содержать не менее 6 символов, содержать буквы в верхнем и нижнем регистре и число
         </p>
     </div>
 </ng-template>
 <ng-template #isSamePsw>
-    <div>
+    <!-- <div> -->
         <div class="error-warning">
             Пароли не совпадают
         </div>
-    </div>
+    <!-- </div> -->
 </ng-template>

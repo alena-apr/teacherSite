@@ -1,11 +1,41 @@
 <p>student-item works!</p>
 
-<div class="main-content">
+<div class="container main-content">
 
-    <div >
-        {{student.login}} <br>
-    {{student._id}} <br>
-    {{student.email}} <br>
+
+    @if (studentAnswers) {
+    <!-- <div *ngFor="let answer of studentAnswers">
+            {{answer.title}}
+        </div> -->
+    <div>
+        @for(answer of studentAnswers; track answer._id) {
+        <div>
+            {{answer._id}}
+            {{answer.title}}
+        </div>
+        }
+        @for(mistake of mistakeRate; track mistake) {
+        <div>
+            {{mistake}}
+        </div>
+        }
     </div>
-    
+    }
+    <!-- <ng-container *ngIf="studentAnswers"> -->
+
+    <!-- </ng-container> -->
+    <!-- <div *ngIf="student">
+        {{student.login}} <br>
+        {{student._id}} <br>
+        {{student.email}} <br>
+    </div> -->
+
+
+
+    <!-- <div *ngFor="let answer of studentAnswers">
+        {{answer}}
+        {{answer.title}} <br>
+        {{answer.realAnswers}} <br>
+        {{answer.studentAnswers}} <br>
+    </div> -->
 </div>

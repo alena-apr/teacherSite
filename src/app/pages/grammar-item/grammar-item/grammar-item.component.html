@@ -6,6 +6,8 @@
 
     <br>
     <br>
+    <a routerLink="/exercises/grammar">Go back</a>
+    <br>
     <br>
      <form action="" [formGroup]="exerciseForm" (ngSubmit)="onSubmit()">
 
@@ -24,7 +26,7 @@
 
             <br>
             <br>
-            <button type="submit">SHOOOOOt</button>
+            <button type="submit" [disabled]="!exerciseForm.valid">SHOOOOOt</button>
         </form>
 
 

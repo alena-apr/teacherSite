@@ -4,16 +4,17 @@ import { Observable } from 'rxjs';
 import { IExercise } from '../../models/exercise';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class GrammarService {
-
-  constructor(
-    private grammarRestService: GrammarRestService
-  ) { }
+  constructor(private grammarRestService: GrammarRestService) {}
 
   getAllGrammar(): Observable<IExercise[]> {
-    return this.grammarRestService.getAllGrammar()
+    return this.grammarRestService.getAllGrammar();
+  }
+
+  postOneGrammar(data: IExercise): Observable<IExercise> {
+    return this.grammarRestService.postOneGrammar(data);
   }
 
   getGrammarById(id: string): Observable<IExercise> {
