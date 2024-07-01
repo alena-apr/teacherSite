@@ -16,6 +16,9 @@ export class AuthComponent {
     psw: new FormControl('', [Validators.required, Validators.minLength(6)]),
   });
 
+  httpError: string;
+  showHttpError: boolean = false;
+
   constructor(
     private http: HttpClient,
     private userService: UserService,
@@ -50,7 +53,10 @@ export class AuthComponent {
           this.router.navigate(['exercises/start']);
         },
         (err: HttpErrorResponse) => {
-          console.log('err', err);
+          // console.log('err', err);
+          this.httpError = err.error.errorText
+          // console.log('error text', this.httpError)
+          this.showHttpError = true;
         }
       );
   }

@@ -4,6 +4,7 @@ import { ExercisesComponent } from './exercises/exercises.component';
 import { GrammarComponent } from './grammar/grammar.component';
 import { StartComponent } from './start/start.component';
 import { adminGuard } from '../../guards/admin/admin.guard';
+import { ShelfComponent } from './shelf/shelf.component';
 
 const routes: Routes = [
   {
@@ -31,7 +32,11 @@ const routes: Routes = [
           import('../admin/admin.module').then(
             (m) => m.AdminModule
           ),
-        // canActivate: [adminGuard]
+        canActivate: [adminGuard]
+      },
+      {
+        path: 'shelf', 
+        component: ShelfComponent
       },
     ],
   },

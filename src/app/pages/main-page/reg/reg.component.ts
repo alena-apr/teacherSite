@@ -34,6 +34,8 @@ export class RegComponent implements OnInit {
   });
 
   isPswSame: boolean = true;
+  httpError: string; 
+  showHttpError: boolean = false;
 
   constructor(
     private userService: UserService,
@@ -72,7 +74,9 @@ export class RegComponent implements OnInit {
         },
         (err: HttpErrorResponse) => {
           console.log('err', err);
-        }
+          this.httpError = err.error.errorText;
+          this.showHttpError = true;
+        } 
       );
 
       
@@ -96,6 +100,8 @@ export class RegComponent implements OnInit {
           },
           (err: HttpErrorResponse) => {
             console.log('err', err);
+            this.httpError = err.error.errorText;
+            this.showHttpError = true;
           }
         );
     }

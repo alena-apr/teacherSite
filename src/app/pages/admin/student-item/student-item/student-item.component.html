@@ -2,11 +2,25 @@
 
 <div class="container main-content">
 
+    <div>
+        {{student.login}}
+        {{student.email}}
+    </div>
 
-    @if (studentAnswers) {
-    <!-- <div *ngFor="let answer of studentAnswers">
+    @if(statistics) {
+        @for(answer of statistics; track answer){
+            <div>
+                Title: {{answer.lastEx.title}} <br>
+                Attempts number: {{answer.tries}} <br>
+                Last attempt correct answers: {{answer.percentOfCorrectAnswers}} % <br> <br><br>
+            </div>
+        }
+    }
+
+    <!-- @if (studentAnswers) {
+    <div *ngFor="let answer of studentAnswers">
             {{answer.title}}
-        </div> -->
+        </div>
     <div>
         @for(answer of studentAnswers; track answer._id) {
         <div>
@@ -20,7 +34,7 @@
         </div>
         }
     </div>
-    }
+    } -->
     <!-- <ng-container *ngIf="studentAnswers"> -->
 
     <!-- </ng-container> -->

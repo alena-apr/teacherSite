@@ -22,6 +22,7 @@
                 [ngTemplateOutlet]="strongPsw"></ng-container>
             <ng-container *ngIf="!isPswSame"
                 [ngTemplateOutlet]="isSamePsw"></ng-container>
+                <ng-container *ngIf="showHttpError" [ngTemplateOutlet]="http"></ng-container>
 
         </div>
 
@@ -40,9 +41,10 @@
     </div>
 </ng-template>
 <ng-template #isSamePsw>
-    <!-- <div> -->
         <div class="error-warning">
             Пароли не совпадают
         </div>
-    <!-- </div> -->
+</ng-template>
+<ng-template #http>
+    <div class="error-warning">{{httpError}}</div>
 </ng-template>

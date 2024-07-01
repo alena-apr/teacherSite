@@ -16,7 +16,7 @@ const routes: Routes = [
       import('./pages/exercises/exercises.module').then(
         (m) => m.ExercisesModule
       ),
-    // canActivate: [authGuard], 
+    canActivate: [authGuard], 
   },
 
   { path: '**', redirectTo: 'main' },

@@ -7,6 +7,8 @@ import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { StartComponent } from './start/start.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ShelfComponent } from './shelf/shelf.component';
+import { ChartModule } from 'primeng/chart';
 
 
 @NgModule({
@@ -16,6 +18,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     HeaderComponent,
     FooterComponent,
     StartComponent,
+    ShelfComponent,
   ],
   imports: [
     CommonModule,
@@ -23,7 +26,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     ReactiveFormsModule,
     FormsModule, 
     NgClass, 
-    NgStyle
+    NgStyle, 
+    ChartModule
   ],
 })
 export class ExercisesModule {}

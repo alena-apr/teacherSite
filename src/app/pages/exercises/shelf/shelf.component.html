@@ -1,0 +1,23 @@
+<p>shelf works!</p>
+
+
+<div class="container main-content">
+
+    @if(student){
+    <div>
+        {{student.login}}
+    </div>
+    }
+
+    @if(statistics) {
+    @for(answer of statistics; track answer; let i = $index){
+    <div>
+        Title: {{answer.lastEx.title}} <br>
+        Attempts number: {{answer.tries}} <br>
+        Last attempt correct answers: {{answer.percentOfCorrectAnswers}} % <br> <br><br>
+        <p-chart type="doughnut" [data]="answer.data" [options]="answer.options" width="300" height="300" />
+
+    </div>
+    }
+    }
+</div>
