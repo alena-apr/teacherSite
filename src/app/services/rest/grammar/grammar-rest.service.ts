@@ -10,7 +10,9 @@ export class GrammarRestService {
   constructor(private http: HttpClient) {}
 
   getAllGrammar(): Observable<IExercise[]> {
-    return this.http.get<IExercise[]>('http://localhost:3000/grammar/exercises');
+    return this.http.get<IExercise[]>(
+      'http://localhost:3000/grammar/exercises'
+    );
   }
 
   postOneGrammar(data: IExercise): Observable<IExercise> {
@@ -24,6 +26,12 @@ export class GrammarRestService {
   getGrammarByIdWOAnswers(id: string): Observable<IExercise> {
     return this.http.get<IExercise>(
       `http://localhost:3000/grammar/exercise/${id}`
+    );
+  }
+
+  getGrammarByName(prompt: string): Observable<IExercise[]> {
+    return this.http.get<IExercise[]>(
+      `http://localhost:3000/grammar/${prompt}`
     );
   }
 }

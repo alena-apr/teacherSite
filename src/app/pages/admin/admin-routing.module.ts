@@ -7,25 +7,25 @@ import { StudentItemComponent } from './student-item/student-item/student-item.c
 
 const routes: Routes = [
   {
-  path: '', 
-    component: AdminDashboardComponent
-  }, 
+    path: '',
+    component: AdminDashboardComponent,
+  },
   {
-    path: 'add', 
-    component: AdminComponent
-  }, 
+    path: 'add',
+    component: AdminComponent,
+  },
   {
-    path: 'students', 
-    component: AdminStudentsComponent
-  }, 
+    path: 'students',
+    component: AdminStudentsComponent,
+  },
   {
-    path: 'student/:id', 
-    component: StudentItemComponent
-  }
+    path: 'student/:id',
+    component: StudentItemComponent,
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AdminRoutingModule { }
+export class AdminRoutingModule {}

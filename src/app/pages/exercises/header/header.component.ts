@@ -6,30 +6,25 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrl: './header.component.scss'
+  styleUrl: './header.component.scss',
 })
 export class HeaderComponent {
-  
   user: IUser;
 
-  constructor(
-    private userService: UserService, 
-    private router: Router,
-  ) {}
-  
+  constructor(private userService: UserService, private router: Router) {}
 
   ngOnInit(): void {
-    this.user = this.userService.getUser()
+    this.user = this.userService.getUser();
   }
 
   goToGrammar(): void {
-    console.log("goToGrammar")
+    console.log('goToGrammar');
     this.router.navigate(['exercises/grammar']);
   }
 
   logOut() {
     localStorage.removeItem(USER_STORE_NAME);
     localStorage.removeItem('user_token');
-    this.router.navigate(['main'])
+    this.router.navigate(['main']);
   }
 }

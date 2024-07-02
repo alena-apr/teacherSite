@@ -2,62 +2,21 @@
 
 <div class="conteiner main-content">
 
+    <input type="text" class="input" #grammarSearchByTitle>
 
-    @if(grammarExs) {
-        @for(exercise of grammarExs; track exercise) {
-            <div class="card" (click)="goToExercisePage(exercise)">
-                <h3>{{exercise.title}}</h3>
-                <h3>{{exercise.difficulty}}</h3>
-            </div>
-        }
+
+    @if(grammarExs && grammarExs.length > 0) {
+    @for(exercise of grammarExs; track exercise) {
+    <div class="card" (click)="goToExercisePage(exercise)">
+        <h3>{{exercise.title}}</h3>
+        <h3>{{exercise.difficulty}}</h3>
+    </div>
+    }
+    }
+    @else {
+    <div>
+        No exercise found
+    </div>
     }
 
-
-
-<!-- 
-    <div *ngIf="grammarExs">
-        <div *ngFor="let exercise of grammarExs" (click)="goToExercisePage(exercise)">
-            <h3>{{exercise.title}}</h3>
-            <h3>{{exercise.difficulty}}</h3>
-        </div>
-    </div> -->
 </div>
-
-
-
-<!--
-<div *ngIf="grammarExs" class="card">
-    <div *ngFor="let ex of grammarExs">
-        {{ex.title}} <br>
-        {{ex.difficulty}} <br>
-
-        <br>
-        <form action="" [formGroup]="exForm" (ngSubmit)="onSubmit()">
-
-            <div *ngFor="let el of ex.text; let i = index">
-                {{el.id}}. {{el.transformedText[0]}}
-                <input type="text" class="input" id={{i}} formControlName="{{el.id}}" />
-                {{el.transformedText[1]}}
-                <span *ngIf=" showAnswers && ex.studentAnswer"
-                    [ngClass]="ex.studentAnswer[i].isCorrect ? 'nice' : 'boo' "
-
-                >     OH</span>
-                    
-            </div>
-
-
-            <br>
-            <br>
-            <button type="submit">SHOOOOOt</button>
-        </form>
-
-        <br>
-        <br>
-      
-
-        <br>
-        <br>
-
-
-    </div>
--->

@@ -52,7 +52,7 @@ export class UserService {
   }
 
   getAllUsers(): Observable<IUser[]> {
-    return this.userServiceRest.getAllUsers()
+    return this.userServiceRest.getAllUsers();
   }
 
   getUserById(id: string): Observable<IUser> {

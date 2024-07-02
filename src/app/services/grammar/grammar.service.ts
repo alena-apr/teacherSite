@@ -24,4 +24,8 @@ export class GrammarService {
   getGrammarByIdWOAnswers(id: string): Observable<IExercise> {
     return this.grammarRestService.getGrammarByIdWOAnswers(id);
   }
+
+  getGrammarByName(prompt: string): Observable<IExercise[]> {
+    return this.grammarRestService.getGrammarByName(prompt);
+  }
 }

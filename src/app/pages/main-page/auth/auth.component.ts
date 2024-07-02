@@ -36,7 +36,7 @@ export class AuthComponent {
 
     this.http
       .post<{ access_token: string; id: string }>(
-        'http://localhost:3000/user/login/' ,
+        'http://localhost:3000/user/login/',
         authUser
       )
       .subscribe(
@@ -47,14 +47,14 @@ export class AuthComponent {
           this.userService.setToken(token);
           this.userService.setToStore(token);
 
-          console.log('authUser', authUser)
-          localStorage.setItem(USER_STORE_NAME, JSON.stringify(authUser.login))
+          console.log('authUser', authUser);
+          localStorage.setItem(USER_STORE_NAME, JSON.stringify(authUser.login));
 
           this.router.navigate(['exercises/start']);
         },
         (err: HttpErrorResponse) => {
           // console.log('err', err);
-          this.httpError = err.error.errorText
+          this.httpError = err.error.errorText;
           // console.log('error text', this.httpError)
           this.showHttpError = true;
         }

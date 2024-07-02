@@ -4,13 +4,10 @@ import { Observable } from 'rxjs';
 import { IAnswerForDb } from '../../models/exercise';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AnswerGrammarService {
-
-  constructor(
-    private answerrGrammarRestService: AnswerGrammarRestService
-  ) { }
+  constructor(private answerrGrammarRestService: AnswerGrammarRestService) {}
 
   getAllAnswer(): Observable<IAnswerForDb[]> {
     return this.answerrGrammarRestService.getAllAnswers();
@@ -21,7 +18,7 @@ export class AnswerGrammarService {
   }
 
   checkAndPostAnswer(data: IAnswerForDb): Observable<IAnswerForDb> {
-    return this.answerrGrammarRestService.checkAndPostAnswer(data)
+    return this.answerrGrammarRestService.checkAndPostAnswer(data);
   }
 
   getAnswerForAdminByUser(id: string): Observable<IAnswerForDb[]> {

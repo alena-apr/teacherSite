@@ -13,10 +13,7 @@ export class AdminComponent {
 
   payload: any;
 
-  constructor(
-    private fb: FormBuilder,
-    private grammarService: GrammarService,
-  ) {
+  constructor(private fb: FormBuilder, private grammarService: GrammarService) {
     this.exerciseForm = this.fb.group({
       type: ['', Validators.required],
       title: ['', Validators.required],
@@ -73,7 +70,7 @@ export class AdminComponent {
       }
     );
 
-    const exerciseForDb:IExercise = {
+    const exerciseForDb: IExercise = {
       type: rawValue.type,
       title: rawValue.title,
       difficulty: parseInt(rawValue.difficulty),
@@ -86,6 +83,6 @@ export class AdminComponent {
 
     this.grammarService.postOneGrammar(exerciseForDb).subscribe((data) => {
       console.log(data);
-    })
+    });
   }
 }

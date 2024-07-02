@@ -34,7 +34,7 @@ export class RegComponent implements OnInit {
   });
 
   isPswSame: boolean = true;
-  httpError: string; 
+  httpError: string;
   showHttpError: boolean = false;
 
   constructor(
@@ -52,8 +52,7 @@ export class RegComponent implements OnInit {
     const email = this.regForm.get('email')?.value;
 
     if (this.checkPswSame(psw, pswRepeat)) {
-
-      console.log('just checking passwords', this.checkPswSame)
+      console.log('just checking passwords', this.checkPswSame);
 
       const userData: IUser = {
         login: login,
@@ -76,10 +75,8 @@ export class RegComponent implements OnInit {
           console.log('err', err);
           this.httpError = err.error.errorText;
           this.showHttpError = true;
-        } 
+        }
       );
-
-      
 
       this.http
         .post<{ access_token: string; id: string }>(

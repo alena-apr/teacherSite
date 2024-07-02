@@ -3,8 +3,6 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'app-exercises',
   templateUrl: './exercises.component.html',
-  styleUrl: './exercises.component.scss'
+  styleUrl: './exercises.component.scss',
 })
-export class ExercisesComponent {
-
-}
+export class ExercisesComponent {}

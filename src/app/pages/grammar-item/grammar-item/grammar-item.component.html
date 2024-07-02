@@ -9,25 +9,19 @@
     <a routerLink="/exercises/grammar">Go back</a>
     <br>
     <br>
-     <form action="" [formGroup]="exerciseForm" (ngSubmit)="onSubmit()">
+    <form action="" [formGroup]="exerciseForm" (ngSubmit)="onSubmit()">
 
-            <div *ngFor="let el of exercise.text; let i = index">
-                {{el.id}}. {{el.transformedText[0]}}
-                <input type="text" class="input" id={{i}} formControlName="{{el.id}}" />
-                <span *ngIf=" showAnswers && exercise.studentAnswers"
-                    [ngClass]="isCorrect[i] ? 'nice' : 'boo'"
-
-                >     OH</span>  
-                {{el.transformedText[1]}}
-               
-                    
-            </div>
+        <div *ngFor="let el of exercise.text; let i = index">
+            {{el.id}}. {{el.transformedText[0]}}
+            <input type="text" class="input" id={{i}} formControlName="{{el.id}}" />
+            <span *ngIf=" showAnswers && exercise.studentAnswers" [ngClass]="isCorrect[i] ? 'nice' : 'boo'"> OH</span>
+            {{el.transformedText[1]}}
 
 
-            <br>
-            <br>
-            <button type="submit" [disabled]="!exerciseForm.valid">SHOOOOOt</button>
-        </form>
+        </div>
 
 
-<!-- </div> -->
+        <br>
+        <br>
+        <button type="submit" [disabled]="!exerciseForm.valid">SHOOOOOt</button>
+    </form>

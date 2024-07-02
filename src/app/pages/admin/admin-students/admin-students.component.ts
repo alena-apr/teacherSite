@@ -6,26 +6,20 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-admin-students',
   templateUrl: './admin-students.component.html',
-  styleUrl: './admin-students.component.scss'
+  styleUrl: './admin-students.component.scss',
 })
 export class AdminStudentsComponent {
+  students: IUser[];
 
-  students: IUser[]; 
-
-  constructor(
-    private userService: UserService, 
-    private router: Router
-  ) {}
+  constructor(private userService: UserService, private router: Router) {}
 
   ngOnInit() {
     this.userService.getAllUsers().subscribe((data) => {
       this.students = data;
-    })
+    });
   }
 
   goToStudentPage(student: IUser) {
-
-    this.router.navigate([`exercises/admin/student/${student._id}`])
+    this.router.navigate([`exercises/admin/student/${student._id}`]);
   }
-
 }

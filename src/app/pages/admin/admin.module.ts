@@ -1,31 +1,17 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
 import { AdminRoutingModule } from './admin-routing.module';
 import { AdminComponent } from './admin/admin.component';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
-
-// import { RadioButtonModule } from 'primeng/radiobutton';
-import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
-// import { InputNumberModule } from 'primeng/inputnumber';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AdminStudentsComponent } from './admin-students/admin-students.component';
-import { BrowserModule } from '@angular/platform-browser';
 
 @NgModule({
   declarations: [
     AdminComponent,
     AdminDashboardComponent,
-    AdminStudentsComponent
+    AdminStudentsComponent,
   ],
-  imports: [
-    CommonModule,
-    AdminRoutingModule, 
-    ReactiveFormsModule,
-    FormsModule,
-    // BrowserModule
-    // RadioButtonModule,
-    // InputNumberModule, 
-    // FormBuilder, 
-  ]
+  imports: [CommonModule, AdminRoutingModule, ReactiveFormsModule, FormsModule],
 })
-export class AdminModule { }
+export class AdminModule {}

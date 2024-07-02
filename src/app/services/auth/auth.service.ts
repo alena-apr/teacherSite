@@ -34,9 +34,7 @@ export class AuthService {
   }
 
   isUserExists(user: IUser): boolean {
-    const isUserExists = this.userStorage.find(
-      (el) => el.login === user.login
-    );
-    return !!isUserExists
+    const isUserExists = this.userStorage.find((el) => el.login === user.login);
+    return !!isUserExists;
   }
 }

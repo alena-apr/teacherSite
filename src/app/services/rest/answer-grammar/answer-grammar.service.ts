@@ -4,25 +4,33 @@ import { Observable } from 'rxjs';
 import { IAnswerForDb } from '../../../models/exercise';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AnswerGrammarRestService {
-
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   getAllAnswers(): Observable<IAnswerForDb[]> {
-    return this.http.get<IAnswerForDb[]>('http://localhost:3000/answer-grammar')
+    return this.http.get<IAnswerForDb[]>(
+      'http://localhost:3000/answer-grammar'
+    );
   }
 
   getAnswerById(id: string): Observable<IAnswerForDb> {
-    return this.http.get<IAnswerForDb>(`http://localhost:3000/answer-grammar/${id}`)
+    return this.http.get<IAnswerForDb>(
+      `http://localhost:3000/answer-grammar/${id}`
+    );
   }
 
   checkAndPostAnswer(data: IAnswerForDb): Observable<IAnswerForDb> {
-    return this.http.post<IAnswerForDb>('http://localhost:3000/answer-grammar', data)
+    return this.http.post<IAnswerForDb>(
+      'http://localhost:3000/answer-grammar',
+      data
+    );
   }
 
   getAnswersForAdminByUser(id: string): Observable<IAnswerForDb[]> {
-    return this.http.get<IAnswerForDb[]>(`http://localhost:3000/answer-grammar/answers-for-admin/${id}`)
+    return this.http.get<IAnswerForDb[]>(
+      `http://localhost:3000/answer-grammar/answers-for-admin/${id}`
+    );
   }
 }

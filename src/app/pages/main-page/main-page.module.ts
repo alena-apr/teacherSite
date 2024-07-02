@@ -6,18 +6,8 @@ import { MainPageComponent } from './main-page.component';
 import { MainPageRoutingModule } from './main-page-routing.module';
 import { ReactiveFormsModule } from '@angular/forms';
 
-
-
 @NgModule({
-  declarations: [
-    MainPageComponent,
-    AuthComponent,
-    RegComponent
-  ],
-  imports: [
-    CommonModule,
-    MainPageRoutingModule,
-    ReactiveFormsModule
-  ]
+  declarations: [MainPageComponent, AuthComponent, RegComponent],
+  imports: [CommonModule, MainPageRoutingModule, ReactiveFormsModule],
 })
-export class MainPageModule { }
+export class MainPageModule {}

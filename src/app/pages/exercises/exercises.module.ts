@@ -10,7 +10,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ShelfComponent } from './shelf/shelf.component';
 import { ChartModule } from 'primeng/chart';
 
-
 @NgModule({
   declarations: [
     ExercisesComponent,
@@ -24,10 +23,10 @@ import { ChartModule } from 'primeng/chart';
     CommonModule,
     ExescisesRoutingModule,
     ReactiveFormsModule,
-    FormsModule, 
-    NgClass, 
-    NgStyle, 
-    ChartModule
+    FormsModule,
+    NgClass,
+    NgStyle,
+    ChartModule,
   ],
 })
 export class ExercisesModule {}

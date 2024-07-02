@@ -1,10 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { GrammarService } from '../../../services/grammar/grammar.service';
-import {
-  IAnswerForDb,
-  IExercise,
-} from '../../../models/exercise';
+import { IAnswerForDb, IExercise } from '../../../models/exercise';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { IUser } from '../../../models/user';
 import { UserService } from '../../../services/user/user.service';
@@ -21,15 +18,15 @@ export class GrammarItemComponent {
   exerciseForm: FormGroup;
   user: IUser;
   answerForDB: IAnswerForDb;
-  checkedAnswers:IAnswerForDb ;
+  checkedAnswers: IAnswerForDb;
   isCorrect: (boolean | undefined)[];
   showAnswers: boolean = false;
 
   constructor(
     private route: ActivatedRoute,
-    private grammarService: GrammarService, 
-    private userService: UserService, 
-    private answerGrammarService: AnswerGrammarService,
+    private grammarService: GrammarService,
+    private userService: UserService,
+    private answerGrammarService: AnswerGrammarService
   ) {}
 
   ngOnInit() {
@@ -44,13 +41,11 @@ export class GrammarItemComponent {
   }
 
   getExercise(id: string) {
-     this.grammarService
-      .getGrammarByIdWOAnswers(id)
-      .subscribe((data) => {
-        this.exercise = data;
-        this.idNumber = data.text.map((el) => el.id);
-        this.exerciseForm = this.createFormGroup(this.idNumber);
-      });
+    this.grammarService.getGrammarByIdWOAnswers(id).subscribe((data) => {
+      this.exercise = data;
+      this.idNumber = data.text.map((el) => el.id);
+      this.exerciseForm = this.createFormGroup(this.idNumber);
+    });
   }
 
   createFormGroup(questionsNumber: number[]): FormGroup {
@@ -67,10 +62,10 @@ export class GrammarItemComponent {
       exerciseId: '',
       type: '',
       title: '',
-      difficulty: 0, 
-      realAnswers: [], 
+      difficulty: 0,
+      realAnswers: [],
       text: [],
-      studentAnswers: []
+      studentAnswers: [],
     };
 
     const rawAnswer = this.exerciseForm.getRawValue();
@@ -87,32 +82,32 @@ export class GrammarItemComponent {
     // console.log('formatedAnswer', this.answerForDB);
 
     this.user = this.userService.getUser();
-    // console.log('USER', this.user); 
+    // console.log('USER', this.user);
     this.answerForDB.userId = this.user._id as string;
     this.answerForDB.exerciseId = this.exercise._id as string;
-    this.answerForDB.type = this.exercise.type; 
+    this.answerForDB.type = this.exercise.type;
     this.answerForDB.title = this.exercise.title;
     this.answerForDB.difficulty = this.exercise.difficulty;
     this.answerForDB.text = this.exercise.text;
-    
+
     // console.log('answerForDB', this.answerForDB)
 
+    this.answerGrammarService
+      .checkAndPostAnswer(this.answerForDB)
+      .subscribe((data) => {
+        console.log('CHECK AND POST ANSWER', data);
+        this.checkedAnswers = data;
+        console.log(this.checkedAnswers);
+        console.log('STUDENT ANSWEWRS', this.checkedAnswers.studentAnswers);
 
-    this.answerGrammarService.checkAndPostAnswer(this.answerForDB).subscribe((data) => {
-      console.log('CHECK AND POST ANSWER', data);
-      this.checkedAnswers = data;
-      console.log(this.checkedAnswers)
-      console.log('STUDENT ANSWEWRS', this.checkedAnswers.studentAnswers)
+        // this.isCorrect = this.checkedAnswers.studentAnswers.map(el => el.isCorrect)
+        // console.log(this.isCorrect)
 
-      // this.isCorrect = this.checkedAnswers.studentAnswers.map(el => el.isCorrect)
-      // console.log(this.isCorrect)
-
-      this.isCorrect = this.checkedAnswers.studentAnswers.map(el => el.isCorrect)
-
-    })
+        this.isCorrect = this.checkedAnswers.studentAnswers.map(
+          (el) => el.isCorrect
+        );
+      });
 
     this.showAnswers = true;
-
-    
   }
 }

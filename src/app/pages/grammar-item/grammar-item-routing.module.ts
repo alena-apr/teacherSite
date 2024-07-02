@@ -4,13 +4,13 @@ import { GrammarItemComponent } from './grammar-item/grammar-item.component';
 
 const routes: Routes = [
   {
-    path: '', 
-    component: GrammarItemComponent
-  }
+    path: '',
+    component: GrammarItemComponent,
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class GrammarItemRoutingModule { }
+export class GrammarItemRoutingModule {}
