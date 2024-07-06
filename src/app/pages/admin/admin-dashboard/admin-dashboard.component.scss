@@ -1,0 +1,10 @@
+@import '../../../../assets/scss/ui.scss';
+
+.link {
+    display: flex;
+    // flex-direction: column;
+    // row-gap: 20px;
+    flex-wrap: wrap;
+    column-gap: 20px;
+    font-size: 24px;
+}

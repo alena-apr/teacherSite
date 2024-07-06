@@ -33,4 +33,10 @@ export class AnswerGrammarRestService {
       `http://localhost:3000/answer-grammar/answers-for-admin/${id}`
     );
   }
+
+  getAnswersByUser(id: string): Observable<IAnswerForDb[]> {
+    return this.http.get<IAnswerForDb[]>(
+      `http://localhost:3000/answer-grammar/answers-by-user/${id}`
+    );
+  }
 }

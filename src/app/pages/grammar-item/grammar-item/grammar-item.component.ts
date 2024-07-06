@@ -21,6 +21,7 @@ export class GrammarItemComponent {
   checkedAnswers: IAnswerForDb;
   isCorrect: (boolean | undefined)[];
   showAnswers: boolean = false;
+  showNote: boolean = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -109,5 +110,14 @@ export class GrammarItemComponent {
       });
 
     this.showAnswers = true;
+
+    this.showNoteFn()
+  }
+
+  showNoteFn() {
+    this.showNote = true; 
+    setTimeout(() => {
+      this.showNote = false;
+    }, 6000)
   }
 }

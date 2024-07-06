@@ -1,23 +1,44 @@
-<p>shelf works!</p>
-
-
 <div class="container main-content">
 
-    @if(student){
-    <div>
-        {{student?.login}}
+    <div class="title h2">
+        @if(student){
+        Here's your statistics, {{student.login}}.
+        }
     </div>
-    }
 
-    @if(statistics) {
-    @for(answer of statistics; track answer; let i = $index){
-    <div>
-        Title: {{answer.lastEx.title}} <br>
-        Attempts number: {{answer.tries}} <br>
-        Last attempt correct answers: {{answer.percentOfCorrectAnswers}} % <br> <br><br>
-        <p-chart type="doughnut" [data]="answer.data" [options]="answer.options" width="300" height="300" />
-
+    <div class="card-wrapper">
+        @if(statistics && statistics.length > 0) {
+        @for(answer of statistics; track answer; let i = $index){
+        <div class="card">
+            <div class="all-exercises-info">
+                <div class="text-info">
+                    <span class="h3">Title: {{answer.lastEx.title}}</span>
+                    <!-- <span class="h3">Title: Prepositions lalalala lalala </span> -->
+                    <span class="h3">Attempts number:{{answer.tries}}</span>
+                    <!-- <span class="h3">Attempts number:5</span> -->
+                </div>
+                <div class="line-chart">
+                    <p-chart type="line" [data]="answer.line.data" [options]="answer.line.options" />
+                    <!-- <p-chart type="line" [data]="line.data" [options]="line.options" /> -->
+                </div>
+            </div>
+            <div class="doughnut-cart">
+                <span class="h3">Last attempt</span>
+                <div class="percentage">
+                    <span class="percent">{{answer.percentOfCorrectAnswers}}%</span>
+                    <!-- <span class="percent">60 %</span> -->
+                    <span class="correct">correct</span>
+                </div>
+                <p-chart type="doughnut" [data]="answer.doughnut.data" [options]="answer.doughnut.options" />
+                <!-- <p-chart type="doughnut" [data]="testData" [options]="" width="300" -->
+                <!-- height="300" /> -->
+                <button class="btnYellow" (click)="goToExercise(answer.lastExId)">Try again</button>
+            </div>
+        </div>
+        }
+        }
+        @else {
+        <div class="h3">You haven't done any exercises yet.</div>
+        }
     </div>
-    }
-    }
 </div>

@@ -57,7 +57,7 @@
   // padding-inline: 40px;
   border: none;
   border-radius: 30px;
-  background-color: rgba(236, 202, 129, 0.7);
+  background-color: rgba(236, 202, 129, 0.702);
   font-weight: 700;
   font-size: 24px;
   line-height: 60px;
@@ -73,11 +73,11 @@
 
   &:hover,
   &:active {
-    background-color: rgba(236, 202, 129, 0.95);
+    background-color: #ecca81f2;
   }
 
   &:disabled {
-    background-color: rgba(184, 217, 222, 0.5);
+    background-color: #b8d9de80;
     color: rgba(84, 64, 50, 0.8);
   }
 
@@ -131,5 +131,41 @@
     font-size: 20px;
     font-weight: 600;
     line-height: 24px;
+  }
+
+}
+.h3 {
+  font-size: 26px;
+  font-weight: 500;
+  letter-spacing: 1.1px;
+  // text-align: center;
+  /* Mobile XS */
+  @media (max-width: 765px) {
+  font-size: 24px;
+  }
+
+  /* Mobile XXS */
+  @media (max-width: 576px) {
+    font-size: 18px;
+  }
+}
+
+.title {
+  margin-block: 30px;
+
+  /* Tablet */
+  @media (max-width: 990px) {
+    margin-block: 33px;
+  }
+
+  /* Mobile XS */
+  @media (max-width: 765px) {
+    margin-block: 23px;
+  }
+
+  /* Mobile XXS */
+  @media (max-width: 576px) {
+    margin-top: 18px;
+    margin-bottom: 25px;
   }
 }

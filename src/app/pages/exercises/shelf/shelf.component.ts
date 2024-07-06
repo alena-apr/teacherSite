@@ -1,6 +1,6 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { IUser } from '../../../models/user';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from '../../../services/user/user.service';
 import { AnswerGrammarService } from '../../../services/answer-grammar/answer-grammar.service';
 import { IAnswerForDb } from '../../../models/exercise';
@@ -16,32 +16,60 @@ export class ShelfComponent {
   data: any;
   options: any;
 
+  //    line = {
+  //     data: {
+  //       labels: ['1', '2', '3'],
+  //       datasets: [
+  //         {
+  //           label: 'Nice!',
+  //           data: [5, 7, 9],
+  //           fill: false,
+  //           borderColor: '#ecca81f2',
+  //           tension: 0.4,
+  //         },
+  //         {
+  //           label: 'Boo...',
+  //           data: [5, 3, 1],
+  //           fill: false,
+  //           borderColor: '#b8d9de80',
+  //           tension: 0.4,
+  //         },
+  //       ],
+  //     },
+  //     options: {
+  //       responsive: true,
+  //       pligins: {
+  //         legend: {
+  //           labels: {
+  //             color: 'black',
+  //           },
+  //         },
+  //       },
+  //     },
+  //   };
   // testData = {
-  //           labels: ['A','B','C'],
+  //           labels: ['A','B'],
   //           datasets: [
   //               {
-  //                   data: [300, 50, 100],
+  //                   data: [300, 50],
   //                   backgroundColor: [
-  //                       "#FF6384",
-  //                       "#36A2EB",
-  //                       "#FFCE56"
+  //                       "#ecca81b3",
+  //                       "#b8d9de80",
   //                   ],
   //                   hoverBackgroundColor: [
-  //                       "#FF6384",
-  //                       "#36A2EB",
-  //                       "#FFCE56"
+  //                       "#ecca81f2",
+  //                       "#aadce3",
   //                   ]
   //               }
   //           ]
   //       };
 
   constructor(
-    private route: ActivatedRoute,
+    // private route: ActivatedRoute,
+    private router: Router,
     private userService: UserService,
     private answerGrammarService: AnswerGrammarService
   ) {}
-
-  // @ViewChild('canvas', {static: true}) myCanvas: ElementRef;
 
   ngOnInit() {
     const user = this.userService.getUser();
@@ -51,33 +79,20 @@ export class ShelfComponent {
     if (userId !== undefined) {
       this.getStudentAnswers(userId);
     }
-
-    // const canvas: HTMLCanvasElement = this.myCanvas.nativeElement;
-    // const context = canvas.getContext('2d');
-    // if (context) {
-    //   this.#drowPie(context)
-    // }
   }
-  // #drowPie(context: CanvasRenderingContext2D) {
-  //   context.beginPath()
-  //   context.arc(100, 100, 100, (Math.PI / 180) * 0, (Math.PI / 180) * 90)
-  //   context.fill()
-  //   }
 
   getStudentAnswers(userId: string) {
-    this.answerGrammarService
-      .getAnswerForAdminByUser(userId)
-      .subscribe((data) => {
-        if (Array.isArray(data)) {
-          const exerciseIdSet = this.makeExercisesIdSet(data);
-          const exersisesById = this.getExercisesById(data, exerciseIdSet);
-          const statistics = exersisesById.map((exersiseByIdArray) => {
-            return this.getStatistics(exersiseByIdArray);
-          });
-          this.statistics = statistics;
-          console.log('STATISTICS', statistics);
-        }
-      });
+    this.answerGrammarService.getAnswersByUser(userId).subscribe((data) => {
+      if (Array.isArray(data)) {
+        const exerciseIdSet = this.makeExercisesIdSet(data);
+        const exersisesById = this.getExercisesById(data, exerciseIdSet);
+        const statistics = exersisesById.map((exersiseByIdArray) => {
+          return this.getStatistics(exersiseByIdArray);
+        });
+        this.statistics = statistics;
+        console.log('STATISTICS', statistics);
+      }
+    });
   }
 
   makeExercisesIdSet(allUserAnswers: IAnswerForDb[]) {
@@ -100,45 +115,100 @@ export class ShelfComponent {
   getStatistics(exersiseByIdArray: IAnswerForDb[]) {
     const tries = exersiseByIdArray.length;
     const lastEx = exersiseByIdArray[exersiseByIdArray.length - 1];
-    const checkedAnswers = lastEx.studentAnswers.map((el) => el.isCorrect);
+    const lastExId = lastEx.exerciseId;
+    const checkedAnswers = this.getIsCorrectArray(lastEx);
     const trues = checkedAnswers.filter((el) => el === true);
+    const falses = checkedAnswers.filter((el) => el === false);
     const percentPerPoint = 100 / checkedAnswers.length;
     const percentOfCorrectAnswers = trues.length * percentPerPoint;
     const percentOfWrongAnswers = 100 - percentOfCorrectAnswers;
-    const falses = checkedAnswers.filter((el) => el === false);
-
-    // const questionsNumber = lastEx.studentAnswers.length;
     const truesNumber = trues.length;
     const falsesNumber = falses.length;
-    const statisticsInfo = {
-      tries,
-      lastEx,
-      percentPerPoint,
-      percentOfCorrectAnswers,
-      percentOfWrongAnswers,
 
+    const doughnut = {
       data: {
         labels: ['Nice!', 'Boo...'],
         datasets: [
           {
             data: [truesNumber, falsesNumber],
-            backgroundColor: ['green', 'red'],
-            hoverBackgroundColor: ['aqua', 'brown'],
+            backgroundColor: ['#ecca81b3', '#b8d9de80'],
+            hoverBackgroundColor: ['#ecca81f2', '#aadce3'],
           },
         ],
       },
-
       options: {
         responsive: true,
         pligins: {
           legend: {
             labels: {
-              color: 'black',
+              color: '#fff',
             },
           },
         },
       },
     };
+    const line = {
+      data: {
+        labels: [''],
+        datasets: [
+          {
+            label: 'Nice!',
+            data: [0],
+            fill: false,
+            borderColor: '#ecca81f2',
+            tension: 0.4,
+          },
+          {
+            label: 'Boo...',
+            data: [0],
+            fill: false,
+            borderColor: '#b8d9de80',
+            tension: 0.4,
+          },
+        ],
+      },
+      options: {
+        responsive: true,
+        pligins: {
+          legend: {
+            labels: {
+              color: '#000',
+            },
+          },
+        },
+      },
+    };
+
+    exersiseByIdArray.forEach((el, index) => {
+      line.data.labels.push(`Attempt ${index + 1}`);
+      const checkedAnswers = this.getIsCorrectArray(el);
+      const trues = checkedAnswers.filter((el) => el === true);
+      const falses = checkedAnswers.filter((el) => el === false);
+      const falsesNumberForEach = falses.length;
+      const truesNumberForEach = trues.length;
+      line.data.datasets[0].data.push(truesNumberForEach);
+      line.data.datasets[1].data.push(falsesNumberForEach);
+    });
+
+    const statisticsInfo = {
+      tries,
+      lastEx,
+      lastExId,
+      percentPerPoint,
+      percentOfCorrectAnswers,
+      percentOfWrongAnswers,
+      doughnut,
+      line,
+    };
+
     return statisticsInfo;
+  }
+
+  getIsCorrectArray(oneExercise: IAnswerForDb) {
+    return oneExercise.studentAnswers.map((el) => el.isCorrect);
+  }
+
+  goToExercise(id: string) {
+    this.router.navigate([`/exercises/exercise/${id}`]);
   }
 }

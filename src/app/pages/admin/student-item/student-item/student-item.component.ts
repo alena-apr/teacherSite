@@ -5,6 +5,7 @@ import { IUser } from '../../../../models/user';
 import { Observable, map } from 'rxjs';
 import { IExercise, IAnswerForDb } from '../../../../models/exercise';
 import { AnswerGrammarService } from '../../../../services/answer-grammar/answer-grammar.service';
+import { getExercisesById, getStatistics, makeExercisesIdSet } from '../../../../helpers/forExercisesStatistics';
 
 @Component({
   selector: 'app-student-item',
@@ -54,66 +55,66 @@ export class StudentItemComponent {
         if (Array.isArray(data)) {
           // console.log('DATA NO PIPE', data);
 
-          const exerciseIdSet = this.makeExercisesIdSet(data);
-          // console.log('exerciseIdSet', exerciseIdSet);
+          const exerciseIdSet = makeExercisesIdSet(data);
+          console.log('exerciseIdSet', exerciseIdSet);
 
-          const exersisesById = this.getExercisesById(data, exerciseIdSet);
-          // console.log('EXERCISES BY ID', exersisesById);
+          const exersisesById = getExercisesById(data, exerciseIdSet);
+          console.log('EXERCISES BY ID', exersisesById);
 
           const statistics = exersisesById.map((exersiseByIdArray) => {
-            return this.getStatistics(exersiseByIdArray)
+            return getStatistics(exersiseByIdArray)
           });
-          // console.log('STATISTICS', statistics);
+          console.log('STATISTICS', statistics);
 
           this.statistics = statistics; 
         }
       });
   }
 
-  makeExercisesIdSet(allUserAnswers: IAnswerForDb[]) {
-    const exerciseIdSet = new Set<string>();
-    allUserAnswers.forEach((el) => exerciseIdSet.add(el.exerciseId));
-    return exerciseIdSet;
-  }
+  // makeExercisesIdSet(allUserAnswers: IAnswerForDb[]) {
+  //   const exerciseIdSet = new Set<string>();
+  //   allUserAnswers.forEach((el) => exerciseIdSet.add(el.exerciseId));
+  //   return exerciseIdSet;
+  // }
 
-  getExercisesById(allExercises: IAnswerForDb[], idSet: Set<string>) {
-    const idArray = Array.from(idSet);
-    const exercisesById = idArray.map((el) => {
-      const exer = allExercises.filter(
-        (exercise) => exercise.exerciseId === el
-      );
-      return exer;
-    });
-    return exercisesById;
-  }
+  // getExercisesById(allExercises: IAnswerForDb[], idSet: Set<string>) {
+  //   const idArray = Array.from(idSet);
+  //   const exercisesById = idArray.map((el) => {
+  //     const exer = allExercises.filter(
+  //       (exercise) => exercise.exerciseId === el
+  //     );
+  //     return exer;
+  //   });
+  //   return exercisesById;
+  // }
 
-  getStatistics(exersiseByIdArray: IAnswerForDb[]) {
-    const tries = exersiseByIdArray.length;
-    // console.log('TRIES', tries);
-    const lastEx = exersiseByIdArray[exersiseByIdArray.length - 1];
-    // console.log('LAST EX', lastEx);
+  // getStatistics(exersiseByIdArray: IAnswerForDb[]) {
+  //   const tries = exersiseByIdArray.length;
+  //   // console.log('TRIES', tries);
+  //   const lastEx = exersiseByIdArray[exersiseByIdArray.length - 1];
+  //   // console.log('LAST EX', lastEx);
 
-    const checkedAnswers = lastEx.studentAnswers.map((el) => el.isCorrect);
-    // console.log(checkedAnswers);
+  //   const checkedAnswers = lastEx.studentAnswers.map((el) => el.isCorrect);
+  //   // console.log(checkedAnswers);
 
-    const trues = checkedAnswers.filter((el) => el === true);
-    // console.log('TRUES', trues);
+  //   const trues = checkedAnswers.filter((el) => el === true);
+  //   // console.log('TRUES', trues);
 
-    const percentPerPoint = 100 / checkedAnswers.length;
-    // console.log('percent per point', percentPerPoint);
+  //   const percentPerPoint = 100 / checkedAnswers.length;
+  //   // console.log('percent per point', percentPerPoint);
 
-    const percentOfCorrectAnswers = trues.length * percentPerPoint;
-    // console.log('percent of correct answers', percentOfCorrectAnswers);
+  //   const percentOfCorrectAnswers = trues.length * percentPerPoint;
+  //   // console.log('percent of correct answers', percentOfCorrectAnswers);
 
-    const percentOfWrongAnswers = 100 - percentOfCorrectAnswers;
-    // console.log('percent of wrong answers', percentOfWrongAnswers);
+  //   const percentOfWrongAnswers = 100 - percentOfCorrectAnswers;
+  //   // console.log('percent of wrong answers', percentOfWrongAnswers);
 
-    return {
-      tries, 
-      lastEx, 
-      percentPerPoint, 
-      percentOfCorrectAnswers, 
-      percentOfWrongAnswers
-    }
-  }
+  //   return {
+  //     tries, 
+  //     lastEx, 
+  //     percentPerPoint, 
+  //     percentOfCorrectAnswers, 
+  //     percentOfWrongAnswers
+  //   }
+  // }
 }

@@ -1,25 +1,5 @@
-@import "../../../../assets/scss/vars.scss";
-@import "../../../../assets/scss/ui.scss";
-
-// .title {
-//   margin-block: 43px;
-
-//   /* Tablet */
-//   @media (max-width: 990px) {
-//     margin-block: 46px;
-//   }
-
-//   /* Mobile XS */
-//   @media (max-width: 765px) {
-//     margin-block: 36px;
-//   }
-
-//   /* Mobile XXS */
-//   @media (max-width: 576px) {
-//     margin-top: 28px;
-//     margin-bottom: 38px;
-//   }
-// }
+@import './vars.scss';
+@import './ui.scss';
 
 .card-wrapper {
   display: flex;
