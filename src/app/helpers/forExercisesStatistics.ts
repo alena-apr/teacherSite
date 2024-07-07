@@ -26,7 +26,8 @@ export function getStatistics(exersiseByIdArray: IAnswerForDb[]) {
   const trues = checkedAnswers.filter((el) => el === true);
   const falses = checkedAnswers.filter((el) => el === false);
   const percentPerPoint = 100 / checkedAnswers.length;
-  const percentOfCorrectAnswers = trues.length * percentPerPoint;
+  const percentOfCorrectAnswers = parseFloat(getNiceDecimal(trues.length * percentPerPoint));
+  // const percentOfCorrectAnswers = parseFloat(percentOfCorrectAnswersRow)
   const percentOfWrongAnswers = 100 - percentOfCorrectAnswers;
   const truesNumber = trues.length;
   const falsesNumber = falses.length;
@@ -112,4 +113,8 @@ export function getStatistics(exersiseByIdArray: IAnswerForDb[]) {
 
 export function getIsCorrectArray(oneExercise: IAnswerForDb) {
   return oneExercise.studentAnswers.map((el) => el.isCorrect);
+}
+
+export function getNiceDecimal(number: any) {
+  return Number.parseFloat(number).toFixed(1);
 }

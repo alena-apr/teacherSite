@@ -1,35 +1,40 @@
-<p>admin works!</p>
+<div class="container main-content">
+    <p class="title h2">Add exercise</p>
 
-<div class="container">
-
-
-    <form [formGroup]="exerciseForm">
-        Type: <input class="input" type="text" formControlName="type"> <br><br>
-        Title: <input class="input" type="text" formControlName="title"> <br><br>
-        Difficulty: <input class="input" type="text" formControlName="difficulty"> <br><br>
+    <form class="form" [formGroup]="exerciseForm">
+        <div class="main-group">
+            <span class="label">Type (input | select): </span><input class="input" type="text" formControlName="type">
+            <span class="label">Title:</span> <input class="input-medium" type="text" formControlName="title">
+            <span class="label">Difficulty (typeof number):</span> <input class="input" type="text"
+                formControlName="difficulty">
+        </div>
 
 
         <div formArrayName="realAnswers">
             <div *ngFor="let realAnswer of realAnswers.controls; let i =index">
-                <div [formGroupName]="i">
-                    Text group {{i}} <button (click)="removeRealAnswers(i)">Delete group</button><br><br>
-                    Id: <input class="input" type="text" formControlName="id"> <br><br>
-                    Answer: <input class="input" type="text" formControlName="answer"> <br><br>
-                    Text: <input class="input" type="text" formControlName="text"> <br><br>
+                <div [formGroupName]="i" class="text-group">
+                    <div>
+                        <span class="label">Text group {{i}} </span>
+                        <button class="btn-delete" (click)="removeRealAnswers(i)">Delete group {{i}}</button>
+                    </div>
+                    <span class="label">Id: </span><input class="input" type="text" formControlName="id">
+                    <span class="label">Answer: </span><input class="input-medium" type="text" formControlName="answer">
+                    <span class="label">Text: </span><input class="input-long" type="text" formControlName="text">
                 </div>
 
 
             </div>
         </div>
-        <button (click)="addRealAnswers()">add</button>
+        <button class="btn-small" (click)="addRealAnswers()">add</button>
     </form>
 
     <br><br><br>
-    <button (click)="showPayload()">payload</button>
+    <button class="btn-small" (click)="showPayload()">payload</button>
     <br><br><br>
     <pre>{{payload}}</pre>
     <br><br><br>
-    <button (click)="showFormattedForm()" [disabled]="!exerciseForm.valid">Show formattedForm</button>
+    <button class="btnYellow margin" (click)="showFormattedForm()" [disabled]="!exerciseForm.valid">Show
+        formattedForm</button>
 
 
 
