@@ -44,9 +44,10 @@ export class AdminComponent {
 
   showPayload() {
     this.payload = JSON.stringify(this.exerciseForm.getRawValue());
+    console.log('PAYLOAD', this.payload)
   }
 
-  showFormattedForm() {
+  sendFormattedForm() {
     const rawValue = this.exerciseForm.getRawValue();
 
     const realAnswers = rawValue.realAnswers.map(
@@ -79,7 +80,7 @@ export class AdminComponent {
       studentAnswers: [],
     };
 
-    console.log(exerciseForDb);
+    console.log('EXERCISE FOR DB',exerciseForDb);
 
     this.grammarService.postOneGrammar(exerciseForDb).subscribe((data) => {
       console.log(data);

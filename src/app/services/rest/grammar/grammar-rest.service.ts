@@ -9,6 +9,12 @@ import { IExercise } from '../../../models/exercise';
 export class GrammarRestService {
   constructor(private http: HttpClient) {}
 
+  getAllGrammarForAdmin(): Observable<IExercise[]> {
+    return this.http.get<IExercise[]>(
+      'http://localhost:3000/grammar'
+    );
+  }
+
   getAllGrammar(): Observable<IExercise[]> {
     return this.http.get<IExercise[]>(
       'http://localhost:3000/grammar/exercises'
@@ -33,5 +39,9 @@ export class GrammarRestService {
     return this.http.get<IExercise[]>(
       `http://localhost:3000/grammar/${prompt}`
     );
+  }
+
+  deleteGrammarById(id: string): Observable<IExercise> {
+    return this.http.delete<IExercise>(`hhtp://localhost:3000/grammar/${id}`);
   }
 }

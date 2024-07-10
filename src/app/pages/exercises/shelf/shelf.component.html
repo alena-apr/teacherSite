@@ -14,7 +14,7 @@
                 <div class="text-info">
                     <span class="h3">Title: {{answer.lastEx.title}}</span>
                     <!-- <span class="h3">Title: Prepositions lalalala lalala </span> -->
-                    <span class="h3">Attempts number:{{answer.tries}}</span>
+                    <span class="h3">Attempts: {{answer.tries}}</span>
                     <!-- <span class="h3">Attempts number:5</span> -->
                 </div>
                 <div class="line-chart">
@@ -32,7 +32,12 @@
                 <p-chart type="doughnut" [data]="answer.doughnut.data" [options]="answer.doughnut.options" />
                 <!-- <p-chart type="doughnut" [data]="testData" [options]="" width="300" -->
                 <!-- height="300" /> -->
+                @if(answer.percentOfCorrectAnswers === 100) {
+                <button class="btnYellow" [disabled]="true" (click)="goToExercise(answer.lastExId)">Try again</button>
+                }
+                @else {
                 <button class="btnYellow" (click)="goToExercise(answer.lastExId)">Try again</button>
+                }
             </div>
         </div>
         }

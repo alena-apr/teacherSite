@@ -20,6 +20,9 @@
                 [ngTemplateOutlet]="strongPsw"></ng-container>
             <ng-container *ngIf="!isPswSame" [ngTemplateOutlet]="isSamePsw"></ng-container>
             <ng-container *ngIf="showHttpError" [ngTemplateOutlet]="http"></ng-container>
+            <ng-container
+                *ngIf="regForm.controls.login.touched && regForm.controls.login.dirty && regForm.controls.login.errors?.loginStrength"
+                [ngTemplateOutlet]="admin"></ng-container>
 
         </div>
 
@@ -43,4 +46,9 @@
 </ng-template>
 <ng-template #http>
     <div class="error-warning">{{httpError}}</div>
+</ng-template>
+<ng-template #admin>
+    <div class="error-warning">
+        Мы в курсе, что вы не админ!
+    </div>
 </ng-template>

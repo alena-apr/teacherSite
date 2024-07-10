@@ -9,6 +9,11 @@ import { IExercise } from '../../models/exercise';
 export class GrammarService {
   constructor(private grammarRestService: GrammarRestService) {}
 
+
+  getAllGrammarForAdmin(): Observable<IExercise[]> {
+    return this.grammarRestService.getAllGrammarForAdmin();
+  }
+
   getAllGrammar(): Observable<IExercise[]> {
     return this.grammarRestService.getAllGrammar();
   }
@@ -28,4 +33,8 @@ export class GrammarService {
   getGrammarByName(prompt: string): Observable<IExercise[]> {
     return this.grammarRestService.getGrammarByName(prompt);
   }
+
+  deleteExerciseById(id: string): Observable<IExercise> {
+    return this.grammarRestService.deleteGrammarById(id);
+  } 
 }
