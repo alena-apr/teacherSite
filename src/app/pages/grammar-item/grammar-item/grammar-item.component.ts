@@ -80,7 +80,7 @@ export class GrammarItemComponent {
       });
     }
 
-    // console.log('formatedAnswer', this.answerForDB);
+    // console.log('formattedAnswer', this.answerForDB);
 
     this.user = this.userService.getUser();
     // console.log('USER', this.user);
