@@ -9,10 +9,6 @@
   row-gap: 15px;
 }
 
-.input {
-  background-color: cadetblue;
-}
-
 .item-input {
   width: 340px;
   padding-inline: 20px;
@@ -20,18 +16,6 @@
   border-radius: 50px;
   font-size: 24px;
   box-shadow: 0px 0px 45px 3px rgba(170, 220, 227, 0.4) inset;
-
-  /* Laptop */
-  @media (max-width: 1199px) {
-  }
-
-  /* Tablet */
-  @media (max-width: 990px) {
-  }
-
-  /* Mobile XS */
-  @media (max-width: 765px) {
-  }
 
   /* Mobile XXS */
   @media (max-width: 576px) {
@@ -55,7 +39,6 @@
   column-gap: 10px;
   align-items: center;
   justify-content: space-between;
-  // border: 1px solid black;
   width: 250px;
   cursor: pointer;
 }

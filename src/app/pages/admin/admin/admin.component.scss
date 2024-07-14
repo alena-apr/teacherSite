@@ -26,10 +26,7 @@
 }
 
 .btn-small, .btn-delete {
-//   width: 100px;
-//   height: 45px;
   border: 1px solid $text;
-//   line-height: 45px;
   cursor: pointer;
 
   &:hover,
@@ -54,7 +51,6 @@
 .input,
 .input-medium,
 .input-long {
-  //   width: 250px;
   height: 29px;
   border-radius: 10px;
   padding-inline: 8px;

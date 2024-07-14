@@ -36,6 +36,7 @@ export class RegComponent implements OnInit {
   isPswSame: boolean = true;
   httpError: string;
   showHttpError: boolean = false;
+  showNote: boolean = false;
 
   constructor(
     private userService: UserService,
@@ -52,7 +53,7 @@ export class RegComponent implements OnInit {
     const email = this.regForm.get('email')?.value;
 
     if (this.checkPswSame(psw, pswRepeat)) {
-      console.log('just checking passwords', this.checkPswSame);
+      // console.log('just checking passwords', this.checkPswSame);
 
       const userData: IUser = {
         login: login,
@@ -70,42 +71,80 @@ export class RegComponent implements OnInit {
           localStorage.setItem(USER_STORE_NAME, JSON.stringify(userData.login));
           console.log('userData', userData);
           // this.router.navigate(['exercises/start']);
+
+          this.http
+            .post<{ access_token: string; id: string }>(
+              'http://localhost:3000/user/login/',
+              authUser
+            )
+            .subscribe(
+              (data) => {
+                authUser._id = data.id;
+                this.userService.setUser(authUser);
+                const token: string = data.access_token;
+                this.userService.setToken(token);
+                this.userService.setToStore(token);
+
+                console.log('authUser', authUser);
+
+                this.router.navigate(['exercises/start']);
+              },
+              (err: HttpErrorResponse) => {
+                console.log('err', err);
+                this.httpError = err.error.errorText;
+                this.showHttpError = true;
+                this.showNote = true;
+              }
+            );
         },
         (err: HttpErrorResponse) => {
           console.log('err', err);
           this.httpError = err.error.errorText;
           this.showHttpError = true;
+          this.showNote = true;
         }
       );
 
-      this.http
-        .post<{ access_token: string; id: string }>(
-          'http://localhost:3000/user/login/',
-          authUser
-        )
-        .subscribe(
-          (data) => {
-            authUser._id = data.id;
-            this.userService.setUser(authUser);
-            const token: string = data.access_token;
-            this.userService.setToken(token);
-            this.userService.setToStore(token);
+      // this.http
+      //   .post<{ access_token: string; id: string }>(
+      //     'http://localhost:3000/user/login/',
+      //     authUser
+      //   )
+      //   .subscribe(
+      //     (data) => {
+      //       authUser._id = data.id;
+      //       this.userService.setUser(authUser);
+      //       const token: string = data.access_token;
+      //       this.userService.setToken(token);
+      //       this.userService.setToStore(token);
 
-            console.log('authUser', authUser);
+      //       console.log('authUser', authUser);
 
-            this.router.navigate(['exercises/start']);
-          },
-          (err: HttpErrorResponse) => {
-            console.log('err', err);
-            this.httpError = err.error.errorText;
-            this.showHttpError = true;
-          }
-        );
+      //       this.router.navigate(['exercises/start']);
+      //     },
+      //     (err: HttpErrorResponse) => {
+      //       console.log('err', err);
+      //       this.httpError = err.error.errorText;
+      //       this.showHttpError = true;
+      //     }
+      //   );
+
+      setTimeout(() => {
+        this.showNote = false;
+        console.log('TIMEOUT');
+      }, 6000);
     }
   }
 
   checkPswSame(psw1: string, psw2: string): boolean {
     this.isPswSame = !(psw1 !== psw2);
+    console.log('isSamePsw');
+    this.showNote = true;
+
+    setTimeout(() => {
+      this.showNote = false;
+      console.log('TIMEOUT');
+    }, 6000);
     return this.isPswSame;
   }
 }

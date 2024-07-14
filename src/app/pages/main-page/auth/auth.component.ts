@@ -18,6 +18,7 @@ export class AuthComponent {
 
   httpError: string;
   showHttpError: boolean = false;
+  showNote: boolean = false;
 
   constructor(
     private http: HttpClient,
@@ -34,6 +35,10 @@ export class AuthComponent {
       psw: psw,
     };
 
+    // if (this.authForm.controls.psw.errors?.minlength < 6) {
+    //   this.showNote = true;
+    // }
+
     this.http
       .post<{ access_token: string; id: string }>(
         'http://localhost:3000/user/login/',
@@ -47,7 +52,7 @@ export class AuthComponent {
           this.userService.setToken(token);
           this.userService.setToStore(token);
 
-          console.log('authUser', authUser);
+          // console.log('authUser', authUser);
           localStorage.setItem(USER_STORE_NAME, JSON.stringify(authUser.login));
 
           this.router.navigate(['exercises/start']);
@@ -55,9 +60,16 @@ export class AuthComponent {
         (err: HttpErrorResponse) => {
           // console.log('err', err);
           this.httpError = err.error.errorText;
-          // console.log('error text', this.httpError)
+          console.log('error text', this.httpError);
           this.showHttpError = true;
+          this.showNote = true;
         }
       );
+
+    // this.showNote = true;
+    setTimeout(() => {
+      this.showNote = false;
+      console.log('TIMEOUT');
+    }, 6000);
   }
 }

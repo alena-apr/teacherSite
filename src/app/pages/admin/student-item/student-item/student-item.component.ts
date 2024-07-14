@@ -1,9 +1,7 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { UserService } from '../../../../services/user/user.service';
 import { IUser } from '../../../../models/user';
-import { Observable, map } from 'rxjs';
-import { IExercise, IAnswerForDb } from '../../../../models/exercise';
 import { AnswerGrammarService } from '../../../../services/answer-grammar/answer-grammar.service';
 import { getExercisesById, getStatistics, makeExercisesIdSet } from '../../../../helpers/forExercisesStatistics';
 
@@ -15,6 +13,57 @@ import { getExercisesById, getStatistics, makeExercisesIdSet } from '../../../..
 export class StudentItemComponent {
   student: IUser;
   statistics: any;
+
+
+     line = {
+      data: {
+        labels: ['1', '2', '3'],
+        datasets: [
+          {
+            label: 'Nice!',
+            data: [5, 7, 9],
+            fill: false,
+            borderColor: '#ecca81f2',
+            tension: 0.4,
+          },
+          {
+            label: 'Boo...',
+            data: [5, 3, 1],
+            fill: false,
+            borderColor: '#b8d9de80',
+            tension: 0.4,
+          },
+        ],
+      },
+      options: {
+        responsive: true,
+        pligins: {
+          legend: {
+            labels: {
+              color: 'black',
+            },
+          },
+        },
+      },
+  };
+  
+  testData = {
+            labels: ['A','B'],
+            datasets: [
+                {
+                    data: [300, 50],
+                    backgroundColor: [
+                        "#ecca81b3",
+                        "#b8d9de80",
+                    ],
+                    hoverBackgroundColor: [
+                        "#ecca81f2",
+                        "#aadce3",
+                    ]
+                }
+            ]
+        };
+
 
   constructor(
     private route: ActivatedRoute,

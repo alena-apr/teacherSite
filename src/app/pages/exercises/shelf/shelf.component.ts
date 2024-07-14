@@ -1,6 +1,6 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 import { IUser } from '../../../models/user';
-import { ActivatedRoute, Router } from '@angular/router';
+import {  Router } from '@angular/router';
 import { UserService } from '../../../services/user/user.service';
 import { AnswerGrammarService } from '../../../services/answer-grammar/answer-grammar.service';
 import { IAnswerForDb } from '../../../models/exercise';

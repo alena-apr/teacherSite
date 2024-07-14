@@ -10,10 +10,10 @@
                 <input class="item-input" type="password" id="psw" formControlName="psw" />
             </div>
 
-            <ng-container *ngIf="authForm.controls.psw.touched && authForm.controls.psw.errors?.minlength"
-                [ngTemplateOutlet]="minLength"></ng-container>
+            <!-- <ng-container *ngIf="authForm.controls.psw.touched && authForm.controls.psw.errors?.minlength && showNote"
+                [ngTemplateOutlet]="minLength"></ng-container> -->
 
-            <ng-container *ngIf="showHttpError" [ngTemplateOutlet]="http"></ng-container>
+            <ng-container *ngIf="showHttpError && showNote" [ngTemplateOutlet]="http"></ng-container>
 
         </div>
         <button type="submit" class="btnYellow" [disabled]="!authForm.valid">Войти</button>
@@ -22,13 +22,13 @@
 </div>
 
 
-<ng-template #minLength>
+<!-- <ng-template #minLength>
     <div class="error-warning">
         <p>
             Проверьте пароль.
         </p>
     </div>
-</ng-template>
+</ng-template> -->
 
 <ng-template #http>
     <div class="error-warning">

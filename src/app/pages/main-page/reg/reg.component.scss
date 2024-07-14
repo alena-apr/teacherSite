@@ -54,7 +54,6 @@
 }
 
 .input__item {
-  // row-gap: 20px;
 
   /* Laptop */
   @media (max-width: 1199px) {
@@ -73,18 +72,6 @@
   border-radius: 50px;
   font-size: 24px;
 
-  // /* Laptop */
-  // @media (max-width: 1199px) {
-  // }
-
-  // /* Tablet */
-  // @media (max-width: 990px) {
-  // }
-
-  // /* Mobile XS */
-  // @media (max-width: 765px) {
-  // }
-
   /* Mobile XXS */
   @media (max-width: 576px) {
     width: 280px;
@@ -93,10 +80,7 @@
 }
 
 .error-warning {
-  // position: absolute;
-  // bottom: -60px;
   text-align: center;
-  // margin-top: -60px;
   color: #6b3035;
   font-weight: 600;
 

@@ -21,9 +21,11 @@
                         <span class="label">Text group {{i}} </span>
                         <button class="btn-delete" (click)="removeRealAnswers(i)">Delete group {{i}}</button>
                     </div>
-                    <span class="label">Id (typeof number): </span><input class="input" type="text" formControlName="id">
+                    <span class="label">Id (typeof number): </span><input class="input" type="text"
+                        formControlName="id">
                     <span class="label">Answer: </span><input class="input-medium" type="text" formControlName="answer">
-                    <span class="label">Text (*** stands for input): </span><input class="input-long" type="text" formControlName="text">
+                    <span class="label">Text (*** stands for input): </span><input class="input-long" type="text"
+                        formControlName="text">
                 </div>
 
 
@@ -39,13 +41,4 @@
     <br><br><br>
     <button class="btnYellow margin" (click)="sendFormattedForm()" [disabled]="!exerciseForm.valid">Send
         formattedForm</button>
-
-
-
-
-
-
-
-
-
 </div>

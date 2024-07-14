@@ -18,8 +18,8 @@
             <ng-container
                 *ngIf="regForm.controls.psw.touched && regForm.controls.psw.dirty && regForm.controls.psw.errors?.minlength && regForm.controls.psw.errors?.passwordStrength"
                 [ngTemplateOutlet]="strongPsw"></ng-container>
-            <ng-container *ngIf="!isPswSame" [ngTemplateOutlet]="isSamePsw"></ng-container>
-            <ng-container *ngIf="showHttpError" [ngTemplateOutlet]="http"></ng-container>
+            <ng-container *ngIf="!isPswSame && showNote" [ngTemplateOutlet]="isSamePsw"></ng-container>
+            <ng-container *ngIf="showHttpError && showNote" [ngTemplateOutlet]="http"></ng-container>
             <ng-container
                 *ngIf="regForm.controls.login.touched && regForm.controls.login.dirty && regForm.controls.login.errors?.loginStrength"
                 [ngTemplateOutlet]="admin"></ng-container>
