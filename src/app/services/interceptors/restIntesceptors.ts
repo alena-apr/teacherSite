@@ -20,7 +20,7 @@ export class RestInterceptorsService implements HttpInterceptor {
     // console.log('hasToken', hasToken);
 
     if (hasToken) {
-      console.log('hasToken', hasToken);
+      // console.log('hasToken', hasToken);
 
       const cloned = req.clone({
         headers: req.headers.set('Autorization', 'Bearer ' + hasToken),

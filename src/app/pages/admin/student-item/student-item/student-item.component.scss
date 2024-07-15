@@ -1,6 +1,13 @@
 @import '../../../../../assets/scss/vars.scss';
+@import '../../../../../assets/scss/ui.scss';
 @import '../../../../../assets/scss/statistics.scss';
 @import '../../../exercises/shelf/shelf.component.scss';
+
+.title-wrapper {
+    display: flex;
+    column-gap: 35px;
+    justify-content: center;
+}
 
 .one-answer {
     display: flex;
